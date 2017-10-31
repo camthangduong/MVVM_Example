@@ -29,3 +29,34 @@ D:\GIT\Learning\Project\XAML Application\MVVC Binding\MVVC Binding\bin\Debug\ko\
 D:\GIT\Learning\Project\XAML Application\MVVC Binding\MVVC Binding\bin\Debug\ru\System.Windows.Interactivity.resources.dll
 D:\GIT\Learning\Project\XAML Application\MVVC Binding\MVVC Binding\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 D:\GIT\Learning\Project\XAML Application\MVVC Binding\MVVC Binding\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\MVVC Binding.exe.config
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\MVVC Binding.exe
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\MVVC Binding.pdb
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\System.Windows.Interactivity.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\de\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\en\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\es\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\it\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC Binding.csprojResolveAssemblyReference.cache
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MainWindow.g.cs
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\Views\Page1.g.cs
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\Views\Page2.g.cs
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\App.g.cs
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC Binding_MarkupCompile.cache
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC Binding_MarkupCompile.lref
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MainWindow.baml
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\Views\Page1.baml
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\Views\Page2.baml
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC Binding.g.resources
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC_Binding.Properties.Resources.resources
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC Binding.csproj.GenerateResource.Cache
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC Binding.csproj.CoreCompileInputs.cache
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC Binding.exe
+D:\GIT\MVVM\MVVC Binding\MVVC Binding\obj\Debug\MVVC Binding.pdb

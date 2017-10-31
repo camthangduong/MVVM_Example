@@ -14,7 +14,7 @@ namespace MVVC_Binding.ViewModels
 
         private void OnBtnClick(string obj)
         {
-            _page2Text = "Changing by button click";
+            Page2Text = "Changing by button click";
         }
 
         private string _page2Text;

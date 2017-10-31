@@ -8,7 +8,7 @@ namespace MVVC_Binding.Utilities
         /// <summary>
         /// Interface implementation
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void SetProperty<T>(ref T member, T val, [CallerMemberName] string propertyName = null)
         {
@@ -18,12 +18,12 @@ namespace MVVC_Binding.Utilities
 
             member = val;
             // Invoke the property change event
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         protected virtual void OnPropertyChanged(string propName)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }
