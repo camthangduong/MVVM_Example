@@ -1,0 +1,45 @@
+﻿<Window x:Class="Silent_Update.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Silent_Update"
+        mc:Ignorable="d"
+        Title="CaseWare Silent Update Wizard" Height="600" Width="1024" ResizeMode="NoResize" Icon="/Silent Update;component/caseware.ico" Topmost="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Border>
+        <Grid>
+            <!-- 
+                The Grid will have two rows and two columns 
+                - First column is for Navigation
+                - Second column is for the content
+                - First row is for the icon
+                - Second row is for content
+            -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition> <!-- Get the width based on the icon font -->
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!-- Image logo -->
+            <Image Grid.Row="0" Grid.Column="1" Source="pack://application:,,,/Resources/Sidelogo-icon.png" Stretch="None"></Image>
+            <!-- Define the navigation, from top to bottom -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                <TextBlock x:Name="homeBtn" Text="{StaticResource homeIcon}" Style="{StaticResource IconText}"></TextBlock>
+                <TextBlock x:Name="settingBtn" Text="{StaticResource settingsIcon}" Style="{StaticResource IconText}"></TextBlock>
+                <TextBlock x:Name="previewBtn" Text="{StaticResource previewIcon}" Style="{StaticResource IconText}"></TextBlock>
+                <TextBlock x:Name="postBtn" Text="{StaticResource runIcon}" Style="{StaticResource IconText}"></TextBlock>
+                <TextBlock x:Name="saveBtn" Text="{StaticResource saveIcon}" Style="{StaticResource IconText}"></TextBlock>
+                <TextBlock x:Name="exitBtn" Text="{StaticResource exitIcon}" Style="{StaticResource IconText}"></TextBlock>
+            </StackPanel>
+            <!-- For Content, this will display the view based on the selcetion of the navigation -->
+            <DockPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Gainsboro">
+                <Grid x:Name="contentWrapper" Background="Gainsboro" VerticalAlignment="Top">
+                    <ContentControl></ContentControl>
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </Border>
+</Window>
