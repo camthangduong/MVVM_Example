@@ -6,7 +6,59 @@
              xmlns:local="clr-namespace:Silent_Update.Views"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1024">
-    <Grid>
-        <TextBlock>Set Both</TextBlock>            
+    <Grid Margin="20">
+        <!-- The page will divided into fours rows and two columns-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!-- For the left section -->
+        <!-- Browse files section -->
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <!-- Label header -->
+            <TextBlock>Directory location of existing files</TextBlock>
+            <!-- Text area field -->
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="300" Height="30" IsReadOnly="True"></TextBox>
+                <TextBlock x:Name="fileBrowseBtn" Text="{StaticResource folderIcon}" Style="{StaticResource IconText}"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <!-- Range seletion option -->
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <CheckBox>Find files within this reporting date range:</CheckBox>
+            <StackPanel Orientation="Horizontal">
+                <Label>From:</Label>
+                <DatePicker></DatePicker>
+                <Label>To:</Label>
+                <DatePicker></DatePicker>
+            </StackPanel>
+        </StackPanel>
+        <!-- New File Name Section -->
+        <StackPanel Grid.Column="0" Grid.Row="2">
+            <Label>New file name</Label>
+            <RadioButton IsChecked="True">Operating name (Engagement properties)</RadioButton>
+            <RadioButton>Client number (Engagement properties)</RadioButton>
+            <StackPanel Orientation="Horizontal">
+                <Label>Append with year-end date</Label>
+                <ComboBox Width="150">
+                    <ComboBoxItem Content="yyyy" Tag="1" IsSelected="True"/>
+                    <ComboBoxItem Content="M/d/yyyy" Tag="2"/>
+                    <ComboBoxItem Content="M/d/yy" Tag="3"/>
+                    <ComboBoxItem Content="MM/dd/yy" Tag="4"/>
+                    <ComboBoxItem Content="MM/dd/yyyy" Tag="5"/>
+                    <ComboBoxItem Content="yy/MM/dd" Tag="6"/>
+                    <ComboBoxItem Content="yyyy-MM-dd" Tag="7"/>
+                    <ComboBoxItem Content="dd-MM-yy" Tag="8"/>
+                    <ComboBoxItem Content="dd-MM-yyyy" Tag="9"/>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+        <!-- For the right section -->
     </Grid>
 </UserControl>
