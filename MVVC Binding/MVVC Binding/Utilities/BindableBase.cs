@@ -14,7 +14,7 @@ namespace MVVC_Binding.Utilities
         {
             // Check for current set member and the new value
             // If they are the same, do nothing
-            if (object.Equals(member, val)) return;
+            // if (object.Equals(member, val)) return;
 
             member = val;
             // Invoke the property change event
