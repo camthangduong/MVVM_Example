@@ -4,8 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Silent_Update"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:views="clr-namespace:Silent_Update.Views"
+        xmlns:ViewModels="clr-namespace:Silent_Update.ViewModels"
         mc:Ignorable="d"
+        Background="Gainsboro"
         Title="CaseWare Silent Update Wizard" Height="600" Width="1024" ResizeMode="NoResize" Icon="/Silent Update;component/caseware.ico" Topmost="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.DataContext>
+        <ViewModels:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:HomePageViewModel}">
+            <views:HomePage></views:HomePage>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:BothSetViewModel}">
+            <views:BothSetView></views:BothSetView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:UpdateSetViewModel}">
+            <views:UpdateSetPage></views:UpdateSetPage>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:YECSetViewModel}">
+            <views:YECSetView></views:YECSetView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:PreviewPageViewModel}">
+            <views:PreviewPageView></views:PreviewPageView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:PostPageViewModel}">
+            <views:PostPageView></views:PostPageView>
+        </DataTemplate>
+    </Window.Resources>
     <Border>
         <Grid>
             <!-- 
@@ -27,17 +54,59 @@
             <Image Grid.Row="0" Grid.Column="1" Source="pack://application:,,,/Resources/Sidelogo-icon.png" Stretch="None"></Image>
             <!-- Define the navigation, from top to bottom -->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#0096C1">
-                <TextBlock x:Name="homeBtn" Text="{StaticResource homeIcon}" Style="{StaticResource IconText}"></TextBlock>
-                <TextBlock x:Name="settingBtn" Text="{StaticResource settingsIcon}" Style="{StaticResource IconText}"></TextBlock>
-                <TextBlock x:Name="previewBtn" Text="{StaticResource previewIcon}" Style="{StaticResource IconText}"></TextBlock>
-                <TextBlock x:Name="postBtn" Text="{StaticResource runIcon}" Style="{StaticResource IconText}"></TextBlock>
-                <TextBlock x:Name="saveBtn" Text="{StaticResource saveIcon}" Style="{StaticResource IconText}"></TextBlock>
-                <TextBlock x:Name="exitBtn" Text="{StaticResource exitIcon}" Style="{StaticResource IconText}"></TextBlock>
+                <TextBlock x:Name="homeBtn" Text="{StaticResource homeIcon}" Style="{StaticResource IconText}">
+                    <!-- Event for mouse on button navigation-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+                <TextBlock x:Name="settingBtn" Text="{StaticResource settingsIcon}" Style="{StaticResource IconText}">
+                    <!-- Event for mouse on button navigation-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="settings" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+                <TextBlock x:Name="previewBtn" Text="{StaticResource previewIcon}" Style="{StaticResource IconText}">
+                    <!-- Event for mouse on button navigation-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="preview" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+                <TextBlock x:Name="postBtn" Text="{StaticResource runIcon}" Style="{StaticResource IconText}">
+                    <!-- Event for mouse on button navigation-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="run" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+                <TextBlock x:Name="saveBtn" Text="{StaticResource saveIcon}" Style="{StaticResource IconText}">
+                    <!-- Event for mouse on button navigation-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="save" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+                <TextBlock x:Name="exitBtn" Text="{StaticResource exitIcon}" Style="{StaticResource IconText}">
+                    <!-- Event for mouse on button navigation-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="exit" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
             </StackPanel>
             <!-- For Content, this will display the view based on the selcetion of the navigation -->
             <DockPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Gainsboro">
                 <Grid x:Name="contentWrapper" Background="Gainsboro" VerticalAlignment="Top">
-                    <ContentControl></ContentControl>
+                    <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
                 </Grid>
             </DockPanel>
         </Grid>

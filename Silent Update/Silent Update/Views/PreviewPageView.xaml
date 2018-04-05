@@ -4,9 +4,102 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Silent_Update.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:VM="clr-namespace:Silent_Update.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1024">
+    <UserControl.DataContext>
+        <VM:PreviewPageViewModel></VM:PreviewPageViewModel>
+    </UserControl.DataContext>
+    <!-- Defined the resource for the control for the data table group -->
+    <UserControl.Resources>
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander IsExpanded="True">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Name" FontWeight="Bold"></TextBlock>
+                                </StackPanel>
+                            </Expander.Header>
+                            <Expander.Content>
+                                <ItemsPresenter>
+                                    <ItemsPresenter.DataContext>
+                                        <DataTemplate>
+                                            <DockPanel>
+                                                <CheckBox IsChecked="True"></CheckBox>
+                                                <TextBlock Text="Name"></TextBlock>
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </ItemsPresenter.DataContext>
+                                </ItemsPresenter>
+                            </Expander.Content>
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock>Preview page</TextBlock>            
+        <DataGrid VerticalAlignment="Top" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
+                  EnableRowVirtualization="False" EnableColumnVirtualization="False" CanUserSortColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Selected" Width="SizeToHeader" MinWidth="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="Index" Text="{Binding Index}" Visibility="Hidden"></TextBlock>
+                                <CheckBox IsChecked="True" IsEnabled="{Binding SelectEnable}" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center">
+                                </CheckBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Name" Width="*" IsReadOnly="True"  MinWidth="300">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="IndexSecond" Text="{Binding Index}" Visibility="Hidden"></TextBlock>
+                                <TextBlock Text="{Binding FileName}" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Versions" Width="Auto" IsReadOnly="True"  MinWidth="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Version}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Working Papers Version" Width="Auto" IsReadOnly="True"  MinWidth="160">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding WPVersion}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Last Modified" Width="Auto" IsReadOnly="True"  MinWidth="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ModifiedDate}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Analysis" Width="*" IsReadOnly="True"  MinWidth="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Analysis}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+        </DataGrid>            
     </Grid>
 </UserControl>

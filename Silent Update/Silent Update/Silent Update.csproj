@@ -55,6 +55,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -75,13 +76,22 @@
     </ApplicationDefinition>
     <Compile Include="Utilities\BindableBase.cs" />
     <Compile Include="Utilities\MyICommand.cs" />
+    <Compile Include="ViewModels\BothSetViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\InProgressBarViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\PostPageViewModel.cs" />
+    <Compile Include="ViewModels\PreviewPageViewModel.cs" />
+    <Compile Include="ViewModels\UpdateSetViewModel.cs" />
+    <Compile Include="ViewModels\YECSetViewModel.cs" />
     <Compile Include="Views\BothSetView.xaml.cs">
       <DependentUpon>BothSetView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomePageView.xaml.cs">
-      <DependentUpon>HomePageView.xaml</DependentUpon>
+    <Compile Include="Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InProgressBar.xaml.cs">
+      <DependentUpon>InProgressBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PostPageView.xaml.cs">
       <DependentUpon>PostPageView.xaml</DependentUpon>
@@ -95,6 +105,10 @@
     <Compile Include="Views\YECSetView.xaml.cs">
       <DependentUpon>YECSetView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\InProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,7 +125,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HomePageView.xaml">
+    <Page Include="Views\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
