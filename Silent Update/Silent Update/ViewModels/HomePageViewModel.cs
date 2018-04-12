@@ -10,13 +10,26 @@ namespace Silent_Update.ViewModels
 {
     public class HomePageViewModel : BindableBase, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler HomePropertyChanged = delegate { };
-
-        public HomePageViewModel() { }
+        /// <summary>
+        /// Interface implemetation
+        /// </summary>
+        public event PropertyChangedEventHandler HomePropertyChanged = delegate { };        
 
         private void RaisePropertyChanged(string v)
         {
             HomePropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
         }
+
+        /// <summary>
+        /// Public properties for bind to the view
+        /// </summary>
+        public bool YEC { get; set; }
+        public bool UPDATE { get; set; }
+        public bool BOTH { get; set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public HomePageViewModel() { }
     }
 }

@@ -5,21 +5,26 @@
              xmlns:clr="clr-namespace:System;assembly=mscorlib"
              StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
-        <!-- Style for the icon using Segoe MDL2 Assets Font, for button navigation -->
-        <Style TargetType="TextBlock" x:Key="IconText">
-            <Setter Property="FontSize" Value="32"></Setter>
-            <Setter Property="Foreground" Value="#ADADAD"></Setter>
-            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"></Setter>
-            <Setter Property="Margin" Value="10, 10, 10, 10"></Setter>
-        </Style>
-        <!-- String Resource for icon button -->
-        <clr:String x:Key="homeIcon">&#xE10F;</clr:String>
-        <clr:String x:Key="settingsIcon">&#xE115;</clr:String>
-        <clr:String x:Key="previewIcon">&#xE12A;</clr:String>
-        <clr:String x:Key="runIcon">&#xE102;</clr:String>
-        <clr:String x:Key="saveIcon">&#xE105;</clr:String>
-        <clr:String x:Key="exitIcon">&#xE10A;</clr:String>
-        <clr:String x:Key="warningIcon">&#xE113;</clr:String>
-        <clr:String x:Key="folderIcon">&#xE188;</clr:String>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StringTable.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Style for the icon using Segoe MDL2 Assets Font, for button navigation -->
+            <Style TargetType="TextBlock" x:Key="IconText">
+                <Setter Property="FontSize" Value="32"></Setter>
+                <Setter Property="Foreground" Value="#ADADAD"></Setter>
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"></Setter>
+                <Setter Property="Margin" Value="10, 10, 10, 10"></Setter>
+            </Style>
+            <!-- String Resource for icon button -->
+            <clr:String x:Key="homeIcon">&#xE10F;</clr:String>
+            <clr:String x:Key="settingsIcon">&#xE115;</clr:String>
+            <clr:String x:Key="previewIcon">&#xE12A;</clr:String>
+            <clr:String x:Key="runIcon">&#xE102;</clr:String>
+            <clr:String x:Key="saveIcon">&#xE105;</clr:String>
+            <clr:String x:Key="exitIcon">&#xE10A;</clr:String>
+            <clr:String x:Key="warningIcon">&#xE113;</clr:String>
+            <clr:String x:Key="folderIcon">&#xE188;</clr:String>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

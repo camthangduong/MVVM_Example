@@ -8,11 +8,29 @@
              Background="Gainsboro"
              d:DesignHeight="600" d:DesignWidth="1024">
     <Grid>
-        <StackPanel>
-            <TextBlock>Welcome to Silent Update Wizard</TextBlock>
-            <RadioButton>YEC</RadioButton>
-            <RadioButton>Update</RadioButton>
-            <RadioButton IsChecked="True">Both</RadioButton>
+        <StackPanel Margin="20">
+            <TextBlock Margin="10" FontSize="22" Text="{StaticResource WelcomeTitle}" Foreground="Blue"></TextBlock>
+            <TextBlock Margin="10" FontSize="18" Text="{StaticResource WelcomeMessage1}" TextWrapping="Wrap"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="10 10 0 0" FontSize="18" FontFamily="Segoe MDL2 Assets" Text="&#xE113;" Foreground="Red"></TextBlock>
+                <TextBlock Margin="10" FontSize="18" Text="{StaticResource WelcomeMessage2}" TextWrapping="Wrap" Width="850"></TextBlock>
+            </StackPanel>
+            <TextBlock Margin="10" FontSize="18" Text="{StaticResource WelcomeOptionTitle}" TextWrapping="Wrap"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                <RadioButton x:Name="YEC" Margin="0,15,0,0" Content="{StaticResource WelcomeYECOption}" FontSize="18" 
+                             IsChecked="{Binding YEC}"
+                             GroupName="WizardOption"></RadioButton>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10,0,0, 0">
+                <RadioButton x:Name="Update" Content="{StaticResource WelcomeUpdateOption}" Margin="0,15,0,0" FontSize="18" 
+                             IsChecked="{Binding UPDATE}"
+                             GroupName="WizardOption"></RadioButton>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <RadioButton x:Name="Both" Content="{StaticResource WelcomeBothOption}" Margin="0,15,0,0" FontSize="18" 
+                             IsChecked="{Binding BOTH}"
+                             GroupName="WizardOption"></RadioButton>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
