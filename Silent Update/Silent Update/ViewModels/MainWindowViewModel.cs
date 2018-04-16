@@ -51,7 +51,7 @@ namespace Silent_Update.ViewModels
                     CurrentViewModel = homePageViewModel;
                     break;
                 case "settings":
-                    CurrentViewModel = updatePageViewModel;
+                    CurrentViewModel = bothPageViewModel;
                     break;
                 case "preview":
                     // Collecting data for client file

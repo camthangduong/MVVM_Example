@@ -54,51 +54,51 @@
             <Image Grid.Row="0" Grid.Column="1" Source="pack://application:,,,/Resources/Sidelogo-icon.png" Stretch="None"></Image>
             <!-- Define the navigation, from top to bottom -->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#0096C1">
-                <TextBlock x:Name="homeBtn" Text="{StaticResource homeIcon}" Style="{StaticResource IconText}">
-                    <!-- Event for mouse on button navigation-->
+                <TextBlock x:Name="home" Text="{StaticResource homeIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource HomeTT}"
+                           MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="settingBtn" Text="{StaticResource settingsIcon}" Style="{StaticResource IconText}">
-                    <!-- Event for mouse on button navigation-->
+                <TextBlock x:Name="settings" Text="{StaticResource settingsIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource SettingTT}"
+                           MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="settings" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="previewBtn" Text="{StaticResource previewIcon}" Style="{StaticResource IconText}">
-                    <!-- Event for mouse on button navigation-->
+                <TextBlock x:Name="preview" Text="{StaticResource previewIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource PreviewTT}"
+                           MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="preview" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="postBtn" Text="{StaticResource runIcon}" Style="{StaticResource IconText}">
-                    <!-- Event for mouse on button navigation-->
+                <TextBlock x:Name="run" Text="{StaticResource runIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource RunTT}"
+                           MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="run" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="saveBtn" Text="{StaticResource saveIcon}" Style="{StaticResource IconText}">
-                    <!-- Event for mouse on button navigation-->
+                <TextBlock x:Name="save" Text="{StaticResource saveIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource SaveTT}"
+                           MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="save" />
+                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="save"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="exitBtn" Text="{StaticResource exitIcon}" Style="{StaticResource IconText}">
-                    <!-- Event for mouse on button navigation-->
+                <TextBlock x:Name="exit" Text="{StaticResource exitIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource ExitTT}"
+                           MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="exit" />
+                            <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="exit"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
