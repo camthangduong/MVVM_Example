@@ -51,7 +51,20 @@ namespace Silent_Update.ViewModels
                     CurrentViewModel = homePageViewModel;
                     break;
                 case "settings":
-                    CurrentViewModel = bothPageViewModel;
+                    // Getting the option selection
+                    if(homePageViewModel.BOTH)
+                    {
+                        // Both option selected
+                        CurrentViewModel = bothPageViewModel;
+                    } else if (homePageViewModel.UPDATE)
+                    {
+                        // Update only option selection
+                        CurrentViewModel = updatePageViewModel;
+                    } else
+                    {
+                        // Year End Close only selected
+                        CurrentViewModel = yecPageViewModel;
+                    }                    
                     break;
                 case "preview":
                     // Collecting data for client file

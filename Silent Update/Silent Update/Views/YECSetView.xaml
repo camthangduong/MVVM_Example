@@ -4,9 +4,128 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Silent_Update.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:vm="clr-namespace:Silent_Update.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1024">
-    <Grid>
-        <TextBlock>Set YEC</TextBlock>            
+    <UserControl.DataContext>
+        <vm:YECSetViewModel></vm:YECSetViewModel>
+    </UserControl.DataContext>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="{StaticResource DirectoryLocation}" FontSize="12"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBox x:Name="updateDirectory" Text="{Binding SourcePath, Mode=TwoWay}"
+                         Width="300" Height="30" HorizontalAlignment="Center" IsReadOnly="True"/>
+                <TextBlock x:Name="update" Text="&#xE188;" FontSize="32" FontFamily="Segoe MDL2 Assets" Margin="10 0 0 0">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property= "Foreground" Value="Gray"/>
+                            <Style.Triggers>
+                                <Trigger Property ="IsMouseOver" Value="True">
+                                    <Setter Property= "Foreground" Value="Brown"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding OpenFolderCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <CheckBox x:Name="lockDownFile" Content="{StaticResource LockDownLbl}" FontWeight="Bold" 
+                  Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" 
+                  VerticalAlignment="Center" HorizontalAlignment="Left"
+                  IsChecked="{Binding LockDownOriginal}"/>
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="0 10 0 0">
+            <CheckBox x:Name="rangeChk" Content="{StaticResource ReportRangeLbl}" IsChecked="{Binding EnableRange}"/>
+            <Grid IsEnabled="{Binding IsChecked, ElementName=rangeChk}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="{StaticResource FromLbl}" Grid.Column="0" Grid.Row="0"/>
+                <DatePicker Grid.Column="1" SelectedDate="{Binding FromDate}"/>
+                <Label Content="{StaticResource ToLbl}" Grid.Column="2" Grid.Row="0"/>
+                <DatePicker Grid.Column="3" SelectedDate="{Binding ToDate}"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="0 10 0 0">
+            <CheckBox x:Name="durationChk" Content="{StaticResource LimitHourLbl}" IsChecked="{Binding EnableDuration}"/>
+            <Grid IsEnabled="{Binding IsChecked, ElementName=durationChk}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="durationTxtBox" Width="100" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Duration}" />
+                <Label Grid.Column="1" Content="{StaticResource HoursLbl}"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel x:Name="clientNameView" Grid.Column="0" Grid.Row="2" Margin="0 10 0 0">
+            <Label Content="{StaticResource NewFileNameLbl}"/>
+            <RadioButton x:Name="operationName" GroupName="EngagementProperty" Content="{StaticResource OPNameLbl}"  Margin="0 5 0 0" IsChecked="{Binding OPName}" />
+            <RadioButton x:Name="clientNumber" GroupName="EngagementProperty" Content="{StaticResource CLNameLbl}" Margin="0 5 0 0" IsChecked="{Binding CLName}" />
+            <Grid Margin="0 5 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{StaticResource AppendingNameLbl}" x:Name="appendYECNameChk" Grid.Column="0" Margin="0 5 0 0"/>
+                <ComboBox x:Name="DateFormat" Width="150" Margin="5 0 0 0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding NameDateFormat}">
+                    <ComboBoxItem Content="yyyy" Tag="1" IsSelected="True"/>
+                    <ComboBoxItem Content="M/d/yyyy" Tag="2"/>
+                    <ComboBoxItem Content="M/d/yy" Tag="3"/>
+                    <ComboBoxItem Content="MM/dd/yy" Tag="4"/>
+                    <ComboBoxItem Content="MM/dd/yyyy" Tag="5"/>
+                    <ComboBoxItem Content="yy/MM/dd" Tag="6"/>
+                    <ComboBoxItem Content="yyyy-MM-dd" Tag="7"/>
+                    <ComboBoxItem Content="dd-MM-yy" Tag="8"/>
+                    <ComboBoxItem Content="dd-MM-yyyy" Tag="9"/>
+                </ComboBox>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="2" Margin="0 10 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{StaticResource UsernameLbl}" Grid.Column="0" Grid.Row="0" Margin="0 5 0 0"/>
+            <TextBox x:Name="usernameTxtBox" Grid.Column="1" Grid.Row="0" Width="200" Margin="0 5 0 0" Text="{Binding Username}" />
+            <Label Content="{StaticResource PasswordLbl}" Grid.Column="0" Grid.Row="1" Margin="0 5 0 0"/>
+            <PasswordBox x:Name="passwordTxtBox" Grid.Column="1" Grid.Row="1" Width="200" Margin="0 5 0 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyUp">
+                        <i:InvokeCommandAction Command="{Binding OnKeyUp}" CommandParameter="{Binding ElementName=passwordTxtBox}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
+            <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Content="{StaticResource ApplicableLbl}"/>
+        </Grid>           
     </Grid>
 </UserControl>
