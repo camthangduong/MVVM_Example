@@ -4,9 +4,153 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Silent_Update.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:vm="clr-namespace:Silent_Update.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1024">
-    <Grid>
-        <TextBlock>Set Update</TextBlock>            
+    <UserControl.DataContext>
+        <vm:UpdateSetViewModel></vm:UpdateSetViewModel>
+    </UserControl.DataContext>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="{StaticResource DirectoryLocation}" FontSize="12"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBox x:Name="updateDirectory" IsReadOnly="True" Text="{Binding Source}"
+                         Width="300" Height="30" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="update" Text="&#xE188;" FontSize="32" FontFamily="Segoe MDL2 Assets" Margin="10 0 0 0">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property= "Foreground" Value="Gray"/>
+                            <Style.Triggers>
+                                <Trigger Property ="IsMouseOver" Value="True">
+                                    <Setter Property= "Foreground" Value="Brown"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding FolderCommand}" CommandParameter="source"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0">
+            <TextBlock Text="{StaticResource DirectoryBackup}" FontSize="12"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBox x:Name="backupDirectory" IsReadOnly="True" Text="{Binding Backup}"
+                         Width="300" Height="30" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="backup" Text="&#xE188;" FontSize="32" FontFamily="Segoe MDL2 Assets" Margin="10 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding FolderCommand}" CommandParameter="backup"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property= "Foreground" Value="Gray"/>
+                            <Style.Triggers>
+                                <Trigger Property ="IsMouseOver" Value="True">
+                                    <Setter Property= "Foreground" Value="Brown"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="0 10 0 0">
+            <CheckBox x:Name="rangeChk" IsChecked="{Binding EnableRange, Mode=TwoWay}" Content="{StaticResource ReportRangeLbl}"/>
+            <Grid IsEnabled="{Binding IsChecked, ElementName=rangeChk}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="{StaticResource FromLbl}" Grid.Column="0" Grid.Row="0"/>
+                <DatePicker Grid.Column="1" SelectedDate="{Binding FromDate}"/>
+                <Label Content="{StaticResource ToLbl}" Grid.Column="2" Grid.Row="0"/>
+                <DatePicker Grid.Column="3" SelectedDate="{Binding ToDate}"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="0 10 0 0">
+            <CheckBox x:Name="durationChk" Content="{StaticResource LimitHourLbl}" IsChecked="{Binding EnableDuration}"/>
+            <Grid IsEnabled="{Binding IsChecked, ElementName=durationChk}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="durationTxtBox" Width="100" Grid.Column="0" Text="{Binding Duration}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Column="1" Content="{StaticResource HoursLbl}"/>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="2" Margin="0 10 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{StaticResource UsernameLbl}" Grid.Column="0" Grid.Row="0" Margin="0 5 0 0"/>
+            <TextBox x:Name="usernameTxtBox" Grid.Column="1" Text="{Binding Username}"
+                     Grid.Row="0" Width="200" Margin="0 5 0 0" />
+            <Label Content="{StaticResource PasswordLbl}" Grid.Column="0" Grid.Row="1" Margin="0 5 0 0"/>
+            <PasswordBox x:Name="passwordTxtBox" Grid.Column="1" Grid.Row="1" Width="200" Margin="0 5 0 0"/>
+            <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Content="{StaticResource ApplicableLbl}"/>
+        </Grid>
+        <StackPanel x:Name="templateView" Grid.Column="0" Grid.Row="3">
+            <Label Content="{StaticResource InstalledTemplateLbl}" FontWeight="Bold"/>
+            <DataGrid x:Name="templateInfoDataGrid" Margin="5" VerticalAlignment="Top"
+                      AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
+                      CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" EnableRowVirtualization="False"
+                      EnableColumnVirtualization="False" RowDetailsVisibilityMode="VisibleWhenSelected"
+                      ItemsSource="{Binding Templates}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="selectedTemplate" Width="SizeToHeader" Header="{StaticResource SelectedLbl}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <!-- This index is the index element number in the list -->
+                                    <!-- User can click on the header to sort, it will keep it to track correct element -->
+                                    <TextBlock x:Name="Index" Visibility="Hidden" Text="{Binding Index}"/>
+                                    <CheckBox HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Selected}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:InvokeCommandAction Command="{Binding DataContext.TemplateSelect, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding ElementName=Index}"></i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </CheckBox>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="nameColumn" Width="*" Header="{StaticResource TemplateNameLbl}" FontWeight="Bold" IsReadOnly="True" Binding="{Binding Name}"/>
+                    <DataGridTextColumn x:Name="versionColumn" Width="*" Header="{StaticResource VersionLbl}" IsReadOnly="True" Binding="{Binding Version}" />
+                    <DataGridTextColumn x:Name="minVersionColumn" Width="*" Header="{StaticResource MinVersionLbl}" IsReadOnly="True" Binding="{Binding MinVersion}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </UserControl>

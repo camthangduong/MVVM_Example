@@ -80,11 +80,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAL\ClientInfo.cs" />
     <Compile Include="DAL\EnviSetting.cs" />
     <Compile Include="DAL\TemplateInfo.cs" />
     <Compile Include="Utilities\BindableBase.cs" />
     <Compile Include="Utilities\CWIOUtility.cs" />
     <Compile Include="Utilities\MyICommand.cs" />
+    <Compile Include="Utilities\SafeFileEnumerator.cs" />
     <Compile Include="ViewModels\BothSetViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\InProgressBarViewModel.cs" />

@@ -17,7 +17,7 @@ namespace Silent_Update.ViewModels
         private BothSetViewModel bothPageViewModel = new BothSetViewModel();
         private UpdateSetViewModel updatePageViewModel = new UpdateSetViewModel();
         private YECSetViewModel yecPageViewModel = new YECSetViewModel();
-        private PreviewPageViewModel previewPageViewModel = new PreviewPageViewModel();
+        private PreviewPageViewModel previewPageViewModel;
         private PostPageViewModel postPageViewModel = new PostPageViewModel();
 
         /// <summary>
@@ -35,12 +35,61 @@ namespace Silent_Update.ViewModels
         }
 
         /// <summary>
+        /// Export the enable property when the process running
+        /// </summary>
+        private bool homeEnabled, settingEnabled, previewEnabled, runEnabled, saveEnabled, exitEnabled;
+
+        public bool HomeEnabled
+        {
+            get { return homeEnabled; }
+            set { homeEnabled = value; SetProperty(ref homeEnabled, value); }
+        }
+
+        public bool SettingEnabled
+        {
+            get { return settingEnabled; }
+            set { settingEnabled = value; SetProperty(ref settingEnabled, value); }
+        }
+
+        public bool PreviewEnabled
+        {
+            get { return previewEnabled; }
+            set { previewEnabled = value; SetProperty(ref previewEnabled, value); }
+        }
+
+        public bool RunEnabled
+        {
+            get { return runEnabled; }
+            set { runEnabled = value; SetProperty(ref runEnabled, value); }
+        }
+
+        public bool SaveEnabled
+        {
+            get { return saveEnabled; }
+            set { saveEnabled = value; SetProperty(ref saveEnabled, value); }
+        }
+
+        public bool ExitEnabled
+        {
+            get { return exitEnabled; }
+            set { exitEnabled = value; SetProperty(ref exitEnabled, value); }
+        }
+
+
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public MainWindowViewModel()
         {
             NavCommand = new MyICommand<string>(OnNav);
-            CurrentViewModel = homePageViewModel;
+            CurrentViewModel = homePageViewModel;            
+            HomeEnabled = true;
+            SettingEnabled = true;
+            PreviewEnabled = true;
+            RunEnabled = true;
+            SaveEnabled = true;
+            ExitEnabled = true;
         }
 
         private void OnNav(string destination)
@@ -71,6 +120,7 @@ namespace Silent_Update.ViewModels
                     // Need to check for the user credetial correct before process
                     // Include the Directory location, back up location if needed
                     // Check for selected master template if needed   
+                    previewPageViewModel = new PreviewPageViewModel(this);
                     CurrentViewModel = previewPageViewModel;
                     break;
                 case "run":

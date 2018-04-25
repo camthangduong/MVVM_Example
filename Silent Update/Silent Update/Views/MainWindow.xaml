@@ -9,7 +9,7 @@
         xmlns:ViewModels="clr-namespace:Silent_Update.ViewModels"
         mc:Ignorable="d"
         Background="Gainsboro"
-        Title="CaseWare Silent Update Wizard" Height="600" Width="1024" ResizeMode="NoResize" Icon="/Silent Update;component/caseware.ico" Topmost="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="CaseWare Silent Update Wizard" Height="600" Width="1024" ResizeMode="NoResize" Icon="/Silent Update;component/caseware.ico" Topmost="False" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.DataContext>
         <ViewModels:MainWindowViewModel />
     </Window.DataContext>
@@ -54,7 +54,11 @@
             <Image Grid.Row="0" Grid.Column="1" Source="pack://application:,,,/Resources/Sidelogo-icon.png" Stretch="None"></Image>
             <!-- Define the navigation, from top to bottom -->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#0096C1">
-                <TextBlock x:Name="home" Text="{StaticResource homeIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource HomeTT}"
+                <TextBlock x:Name="home" 
+                           Text="{StaticResource homeIcon}" 
+                           Style="{StaticResource IconText}" 
+                           ToolTip="{StaticResource HomeTT}"
+                           IsEnabled="{Binding HomeEnabled}"
                            MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -62,7 +66,11 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="settings" Text="{StaticResource settingsIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource SettingTT}"
+                <TextBlock x:Name="settings" 
+                           Text="{StaticResource settingsIcon}" 
+                           Style="{StaticResource IconText}" 
+                           ToolTip="{StaticResource SettingTT}"
+                           IsEnabled="{Binding SettingEnabled}"
                            MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -70,7 +78,11 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="preview" Text="{StaticResource previewIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource PreviewTT}"
+                <TextBlock x:Name="preview" 
+                           Text="{StaticResource previewIcon}" 
+                           Style="{StaticResource IconText}" 
+                           ToolTip="{StaticResource PreviewTT}"
+                           IsEnabled="{Binding PreviewEnabled}"
                            MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -78,7 +90,11 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="run" Text="{StaticResource runIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource RunTT}"
+                <TextBlock x:Name="run" 
+                           Text="{StaticResource runIcon}" 
+                           Style="{StaticResource IconText}" 
+                           ToolTip="{StaticResource RunTT}"
+                           IsEnabled="{Binding RunEnabled}"
                            MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -86,7 +102,11 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="save" Text="{StaticResource saveIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource SaveTT}"
+                <TextBlock x:Name="save" 
+                           Text="{StaticResource saveIcon}" 
+                           Style="{StaticResource IconText}" 
+                           ToolTip="{StaticResource SaveTT}"
+                           IsEnabled="{Binding SaveEnabled}"
                            MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -94,7 +114,11 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBlock>
-                <TextBlock x:Name="exit" Text="{StaticResource exitIcon}" Style="{StaticResource IconText}" ToolTip="{StaticResource ExitTT}"
+                <TextBlock x:Name="exit" 
+                           Text="{StaticResource exitIcon}" 
+                           Style="{StaticResource IconText}" 
+                           ToolTip="{StaticResource ExitTT}"
+                           IsEnabled="{Binding ExitEnabled}"
                            MouseEnter="BtnMouseEnter" MouseLeave="BtnMouseLeave" MouseDown="BtnMouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">

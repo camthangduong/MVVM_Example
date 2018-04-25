@@ -43,7 +43,8 @@
     </UserControl.Resources>
     <Grid>
         <DataGrid VerticalAlignment="Top" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
-                  EnableRowVirtualization="False" EnableColumnVirtualization="False" CanUserSortColumns="False">
+                  EnableRowVirtualization="False" EnableColumnVirtualization="False" CanUserSortColumns="False"
+                  ItemsSource="{Binding GroupedClientData}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Selected" Width="SizeToHeader" MinWidth="60">
                     <DataGridTemplateColumn.CellTemplate>
