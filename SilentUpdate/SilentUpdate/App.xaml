@@ -1,0 +1,27 @@
+﻿<Application x:Class="SilentUpdate.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SilentUpdate"
+             xmlns:prop="clr-namespace:System;assembly=mscorlib"
+             StartupUri="Views\MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Style for the icon using Segoe MDL2 Assets Font, for button navigation -->
+            <Style TargetType="TextBlock" x:Key="IconText">
+                <Setter Property="FontSize" Value="32"></Setter>
+                <Setter Property="Foreground" Value="#ADADAD"></Setter>
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"></Setter>
+                <Setter Property="Margin" Value="10, 10, 10, 10"></Setter>
+            </Style>
+            <!-- String Resource for icon button -->
+            <prop:String x:Key="homeIcon">&#xE10F;</prop:String>
+            <prop:String x:Key="settingsIcon">&#xE115;</prop:String>
+            <prop:String x:Key="previewIcon">&#xE12A;</prop:String>
+            <prop:String x:Key="runIcon">&#xE102;</prop:String>
+            <prop:String x:Key="saveIcon">&#xE105;</prop:String>
+            <prop:String x:Key="exitIcon">&#xE10A;</prop:String>
+            <prop:String x:Key="warningIcon">&#xE113;</prop:String>
+            <prop:String x:Key="folderIcon">&#xE188;</prop:String>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

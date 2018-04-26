@@ -1,0 +1,49 @@
+﻿<Window x:Class="SilentUpdate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ViewModels="clr-namespace:SilentUpdate.ViewModels"
+        xmlns:local="clr-namespace:SilentUpdate"
+        mc:Ignorable="d"
+        Title="Silent Update Wizard" Height="600" Width="1024">
+    <Window.DataContext>
+        <ViewModels:MainWindowViewModel></ViewModels:MainWindowViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:PreviewPageViewModel}"></DataTemplate>
+    </Window.Resources>
+    <Grid Background="Gainsboro">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#0096C1">
+            <TextBlock x:Name="home" Text="{StaticResource homeIcon}" Style="{StaticResource IconText}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="home" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBlock>
+            <TextBlock x:Name="setting" Text="{StaticResource settingsIcon}" Style="{StaticResource IconText}">
+                 <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="setting" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBlock>
+        </StackPanel>
+        <Image Grid.Column="1" Grid.Row="0" Source="/SilentUpdate;component/Resources/Sidelogo-icon.png"></Image>
+        <DockPanel Grid.Column="1" Grid.Row="1" Background="Gainsboro">
+            <Grid x:Name="contentWrapper">
+                <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>
