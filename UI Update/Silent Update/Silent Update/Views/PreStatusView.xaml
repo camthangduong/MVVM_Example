@@ -1,16 +1,19 @@
-﻿<UserControl x:Class="Silent_Update.Views.PreviewPageView"
+﻿<UserControl x:Class="Silent_Update.Views.PreStatusView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Silent_Update.Views"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-             xmlns:VM="clr-namespace:Silent_Update.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:vm="clr-namespace:Silent_Update.ViewModels"
+             xmlns:v="clr-namespace:Silent_Update.Views"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1024">
     <UserControl.DataContext>
-        <VM:PreviewPageViewModel></VM:PreviewPageViewModel>
+        <vm:PreStatusViewModel></vm:PreStatusViewModel>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <v:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter"></v:YesNoToBooleanConverter>
+    </UserControl.Resources>
     <Grid>
         <DataGrid ItemsSource="{Binding GroupClients}" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
             <!-- Define the group style -->

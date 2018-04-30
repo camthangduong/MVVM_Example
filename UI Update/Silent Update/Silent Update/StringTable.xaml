@@ -1,0 +1,110 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Silent_Update">
+    <!-- String resource that can be localized -->
+    <system:String x:Key="HomeTT">Home</system:String>
+    <system:String x:Key="SettingTT">Settings</system:String>
+    <system:String x:Key="PreviewTT">Preview</system:String>
+    <system:String x:Key="RunTT">Run</system:String>
+    <system:String x:Key="SaveTT">Save Report</system:String>
+    <system:String x:Key="ExitTT">Exit</system:String>
+    <!-- Button Tooltip -->
+    <!-- Welcome Page Constant-->
+    <system:String x:Key="WelcomeTitle">Welcome to CaseWare Silent Update Wizard</system:String>
+    <system:String x:Key="WelcomeMessage1">The CaseWare Silent Update Wizard performs a batch year-end-close and applies functionality template updates and default content updates to client files within specified directory.</system:String>
+    <system:String x:Key="WelcomeMessage2">It is strongly recommended that you exit all Window programs and close all the clients files before running the wizard.</system:String>
+    <system:String x:Key="WelcomeOptionTitle">What do you wish to do?</system:String>
+    <system:String x:Key="WelcomeYECOption">Year-end-close only</system:String>
+    <system:String x:Key="WelcomeUpdateOption">Template update only</system:String>
+    <system:String x:Key="WelcomeBothOption">Year-end close and update</system:String>
+    <!-- Common for all setting pages Constant-->
+    <system:String x:Key="DirectoryLocation">Directory location of exsiting files</system:String>
+    <system:String x:Key="DirectoryBackup">Backup directory location</system:String>
+    <system:String x:Key="ReportRangeLbl">Find files within this reporting date range:</system:String>
+    <system:String x:Key="LimitHourLbl">Duration in (hours)</system:String>
+    <system:String x:Key="FromLbl">From:</system:String>
+    <system:String x:Key="ToLbl">To:</system:String>
+    <system:String x:Key="HoursLbl">Hours</system:String>
+    <system:String x:Key="UsernameLbl">Username: *</system:String>
+    <system:String x:Key="PasswordLbl">Password: *</system:String>
+    <system:String x:Key="ApplicableLbl">* If applicable</system:String>
+    <!-- Common for Update and Both Page Constant-->
+    <system:String x:Key="InstalledTemplateLbl">Installed templates</system:String>
+    <system:String x:Key="SelectedLbl">Selected</system:String>
+    <system:String x:Key="TemplateNameLbl">Template Name</system:String>
+    <system:String x:Key="VersionLbl">Version</system:String>
+    <system:String x:Key="MinVersionLbl">Minimum Version</system:String>
+    <!-- Common for YEC and Both Page Constant-->
+    <system:String x:Key="NewFileNameLbl">New file name</system:String>
+    <system:String x:Key="OPNameLbl">Operating name (Engagement properties)</system:String>
+    <system:String x:Key="CLNameLbl">Client number (Engagement properties)</system:String>
+    <system:String x:Key="AppendingNameLbl">Append with year-end date</system:String>
+    <system:String x:Key="LockDownLbl">Lock down original file</system:String>
+    <!-- Progress Bar Page Constant-->
+    <system:String x:Key="WorkingLbl">Working...</system:String>
+    <system:String x:Key="CancelBtnLbl">Cancel</system:String>
+    <!-- Preview Page constant -->
+    <system:String x:Key="NameHeaderLbl">Name</system:String>
+    <system:String x:Key="WPHeaderLbl">Working Papers Version</system:String>
+    <system:String x:Key="LastModifiedLbl">Last Modified</system:String>
+    <system:String x:Key="AnalysisLbl">Analysis</system:String>
+    <system:String x:Key="ToBeUpddate">To Be Updated</system:String>
+    <system:String x:Key="NotToBeUpddate">Not To Be Updated</system:String>
+    <system:String x:Key="ToBeRollForward">To Be Roll Forwarded</system:String>
+    <system:String x:Key="NotToBeRollForward">Not To Be Roll Forwarded</system:String>
+    <system:String x:Key="ToBeRollForwardUpdate">To Be Roll Forwarded/Updated</system:String>
+    <system:String x:Key="NotToBeRollForwardUpdate">Not To Be Roll Forwarded/Updated</system:String>
+    <!-- Post Page constant -->
+    <system:String x:Key="HeaderError">Errors</system:String>
+    <system:String x:Key="SuccessfullyUpdated">Successfully Updated</system:String>
+    <system:String x:Key="NotSuccessfullyUpdated">Not Successfully Updated</system:String>
+    <system:String x:Key="SuccessfullyRF">Successfully Roll Forwarded</system:String>
+    <system:String x:Key="NotSuccessfullyRF">Not Successfully Roll Forwarded</system:String>
+    <system:String x:Key="SuccessfullyRFUpdate">Successfully Roll Forwarded/Updated</system:String>
+    <system:String x:Key="NotSuccessfullyRFUpdate">Not Successfully Roll Forwarded/Updated</system:String>
+    <!-- Message constant -->
+    <system:String x:Key="ContactAdminError">There is an error while running application on your machine. Please contact administartor for support.</system:String>
+    <system:String x:Key="FileCheckout">File is checked out</system:String>
+    <system:String x:Key="SmartSyncOutstanding">SmartSync child outstanding</system:String>
+    <system:String x:Key="FileLocked">File is locked</system:String>
+    <system:String x:Key="FileSignedout">File is signed out</system:String>
+    <system:String x:Key="FileProtected">File is protected</system:String>
+    <system:String x:Key="FailedBackup">Failed to back-up</system:String>
+    <system:String x:Key="FailOpen">Failed to open the file</system:String>
+    <system:String x:Key="FailRF">Failed to run roll forward</system:String>
+    <system:String x:Key="FailUpdate">Failed to update</system:String>
+    <system:String x:Key="FailCompress">Failed to uncompress the file</system:String>
+    <system:String x:Key="CollectingFileData">Collecting client file information</system:String>
+    <system:String x:Key="CollectingMasterData">Collecting master template information</system:String>
+    <system:String x:Key="NoFileSelected">There is no client file selected.</system:String>
+    <system:String x:Key="NoFile">There is no engagement file in selected directory.</system:String>
+    <system:String x:Key="NoMaster">There is no master template selected.</system:String>
+    <system:String x:Key="NoSourceMaster">Source template of client file is not installed</system:String>
+    <system:String x:Key="NotEnoughSpace">The selected directory does not have enough empty space to process the files.</system:String>
+    <system:String x:Key="SelectDirectory">Please select the directory location.</system:String>
+    <system:String x:Key="PermissionDirectory">You do not have access permission on selected directory.</system:String>
+    <system:String x:Key="SelectBKDirectory">Please select back up directory location</system:String>
+    <system:String x:Key="CorrectSetting">Please ensure all settings are correct.</system:String>
+    <system:String x:Key="OnlyAuditUpdate">Only Audit component will be updated</system:String>
+    <system:String x:Key="OnlyFinUpdate">Only Financials component will be updated</system:String>
+    <system:String x:Key="PDFCreateError">PDF Document creation falied</system:String>
+    <system:String x:Key="ApplicationFail">The error mostly caused by missing dll library file. Please contact administartor for support.</system:String>
+    <system:String x:Key="PleaseWait">Please wait..</system:String>
+    <system:String x:Key="ProcessFile">Processing client file</system:String>
+    <system:String x:Key="ProcessCancel">The process was canceled by user.</system:String>
+    <system:String x:Key="OnlyRF">Only roll forward to be performed</system:String>
+    <system:String x:Key="WaitForCurrent">Please wait for current file to finish.</system:String>
+    <system:String x:Key="NoBKSelect">You have not selected the back up directory. Do you want to continue?</system:String>
+    <system:String x:Key="FileOutRange">Year end out of range</system:String>
+    <system:String x:Key="UnkownVersion">Unkown version</system:String>
+    <!-- PDF Constant -->
+    <system:String x:Key="UpdateON">UPDATE ON</system:String>
+    <system:String x:Key="RFON">YEAR END CLOSE ON</system:String>
+    <system:String x:Key="PDFTitle">SILENT UPDATE WIZARD</system:String>
+    <system:String x:Key="PDFStart">Start</system:String>
+    <system:String x:Key="PDFEnd">End</system:String>
+    <system:String x:Key="PDFResult">Result</system:String>
+    <system:String x:Key="PDFCopyRight">CaseWare International Inc. 2018</system:String>
+    <system:String x:Key="PDFAction">Action</system:String>
+</ResourceDictionary>
