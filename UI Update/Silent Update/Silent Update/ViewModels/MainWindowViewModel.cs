@@ -13,6 +13,10 @@ namespace Silent_Update.ViewModels
         private PreStatusViewModel preStatusViewModel;
         private HomeViewModel homeViewModel;
         private PostStatusViewModel postStatusViewModel;
+        private SettingBothViewModel bothViewModel;
+        private SettingHealthCheckViewModel healthCheckViewModel;
+        private SettingUpdateViewModel updateViewModel;
+        private SettingYECViewModel yecViewModel;
 
         public MainWindowViewModel()
         {
@@ -22,6 +26,18 @@ namespace Silent_Update.ViewModels
             preStatusViewModel = new PreStatusViewModel();
             homeViewModel = new HomeViewModel();
             postStatusViewModel = new PostStatusViewModel();
+            bothViewModel = new SettingBothViewModel();
+            healthCheckViewModel = new SettingHealthCheckViewModel();
+            updateViewModel = new SettingUpdateViewModel();
+            yecViewModel = new SettingYECViewModel();
+
+            HomeEnabled = true;
+            SettingEnabled = true;
+            PreviewEnabled = true;
+            RunEnabled = true;
+            SaveEnabled = true;
+            ExitEnabled = true;
+
             CurrentViewModel = homeViewModel;
         }
 
@@ -34,21 +50,37 @@ namespace Silent_Update.ViewModels
                     break;
                 case "settings":
                     // Getting the option selection
-                    CurrentViewModel = preStatusViewModel;
+                    if (homeViewModel.BOTH)
+                    {
+                        // Both option selected
+                        CurrentViewModel = bothViewModel;
+                    }
+                    else if (homeViewModel.UPDATE)
+                    {
+                        // Update only option selection
+                        CurrentViewModel = updateViewModel;
+                    }
+                    else
+                    {
+                        // Year End Close only selected
+                        CurrentViewModel = yecViewModel;
+                    }
                     break;
                 case "preview":
-                    // Collecting data for client file
-                    // Need to check for the user credetial correct before process
+                    // Check if the client directory is selected
+                    // Check if the selection is Update/Both, if YES then the master selection need to be check
+                    // Collecting data for client file when the check is passed
+                    // Need to check for the user credetial correct before process, get all the password from the password list
                     // Include the Directory location, back up location if needed
                     // Check for selected master template if needed   
-                    CurrentViewModel = postStatusViewModel;
+                    CurrentViewModel = preStatusViewModel;
                     break;
                 case "run":
                     // This will run the long process
                     // To Perform the selected task
                     // Need to check for the user credetial correct before process
                     // Check for any file selected to be process                    
-                    CurrentViewModel = homeViewModel;
+                    CurrentViewModel = postStatusViewModel;
                     break;
                 case "save":
                     // Save the current result to PDF file
@@ -76,6 +108,47 @@ namespace Silent_Update.ViewModels
             {
                 SetProperty(ref _CurrentViewModel, value);
             }
+        }
+
+        /// <summary>
+        /// Export the enable property when the process running
+        /// </summary>
+        private bool homeEnabled, settingEnabled, previewEnabled, runEnabled, saveEnabled, exitEnabled;
+
+        public bool HomeEnabled
+        {
+            get { return homeEnabled; }
+            set { homeEnabled = value; SetProperty(ref homeEnabled, value); }
+        }
+
+        public bool SettingEnabled
+        {
+            get { return settingEnabled; }
+            set { settingEnabled = value; SetProperty(ref settingEnabled, value); }
+        }
+
+        public bool PreviewEnabled
+        {
+            get { return previewEnabled; }
+            set { previewEnabled = value; SetProperty(ref previewEnabled, value); }
+        }
+
+        public bool RunEnabled
+        {
+            get { return runEnabled; }
+            set { runEnabled = value; SetProperty(ref runEnabled, value); }
+        }
+
+        public bool SaveEnabled
+        {
+            get { return saveEnabled; }
+            set { saveEnabled = value; SetProperty(ref saveEnabled, value); }
+        }
+
+        public bool ExitEnabled
+        {
+            get { return exitEnabled; }
+            set { exitEnabled = value; SetProperty(ref exitEnabled, value); }
         }
     }
 }

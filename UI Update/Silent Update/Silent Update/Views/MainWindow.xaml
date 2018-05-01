@@ -8,7 +8,8 @@
         xmlns:vm="clr-namespace:Silent_Update.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1024">
+        Background="Gainsboro"        
+        Title="MainWindow" Height="600" Width="1024" ResizeMode="NoResize" Icon="/Silent Update;component/Resources/caseware.ico" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.DataContext>
         <vm:MainWindowViewModel></vm:MainWindowViewModel>
     </Window.DataContext>
@@ -22,8 +23,20 @@
         <DataTemplate DataType="{x:Type vm:PostStatusViewModel}">
             <v:PostStatusView></v:PostStatusView>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SettingBothViewModel}">
+            <v:SettingBothView></v:SettingBothView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SettingHealthCheckViewModel}">
+            <v:SettingHealthCheckView></v:SettingHealthCheckView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SettingUpdateViewModel}">
+            <v:SettingUpdateView></v:SettingUpdateView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SettingYECViewModel}">
+            <v:SettingYECView></v:SettingYECView>
+        </DataTemplate>
     </Window.Resources>
-    <Border>
+    <Border BorderBrush="Black" BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
@@ -33,6 +46,8 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <!-- Image logo -->
+            <Image Grid.Row="0" Grid.Column="1" Source="pack://application:,,,/Resources/Sidelogo-icon.png" Stretch="None"></Image>
             <!-- Define the navigation, from top to bottom -->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#0096C1">
                 <TextBlock x:Name="home" 

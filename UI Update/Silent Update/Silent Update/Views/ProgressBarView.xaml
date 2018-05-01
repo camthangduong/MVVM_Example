@@ -1,0 +1,29 @@
+﻿<Window x:Class="Silent_Update.Views.ProgressBarView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Silent_Update.Views"        
+        xmlns:vm="clr-namespace:Silent_Update.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Background="Gainsboro"
+        Title="ProgressBarView" 
+        Height="120" Width="300" WindowStartupLocation="CenterOwner" WindowStyle="None" WindowState="Normal" ResizeMode="NoResize" Topmost="True">
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Working on..." TextAlignment="Center" Grid.Row="0" TextWrapping="Wrap"></TextBlock>
+        <TextBlock x:Name="Message" Text="Working on the longest file name..." TextAlignment="Center" Grid.Row="1" TextWrapping="Wrap"></TextBlock>
+        <ProgressBar x:Name="workingBar" Height="15" IsIndeterminate="True"  Grid.Row="2" />
+        <Button Content="Cancel" Width="Auto" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3"
+                Padding="10, 0, 10, 0"
+                Command="{Binding CancelCommand}">
+        </Button>
+    </Grid>
+</Window>

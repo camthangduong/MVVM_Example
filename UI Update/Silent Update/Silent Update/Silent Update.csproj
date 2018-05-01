@@ -14,7 +14,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -32,12 +32,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\caseware.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Expression.Interaction.3.0.40218.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="PdfFileWriter">
+      <HintPath>C:\Users\thang\Downloads\PdfFileWriter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Expression.Interaction.3.0.40218.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -59,11 +66,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAL\ClientInfoUtil.cs" />
+    <Compile Include="DAL\DataUtilities.cs" />
+    <Compile Include="DAL\PerformYEC.cs" />
+    <Compile Include="Models\TemplateInfo.cs" />
     <Compile Include="Utilities\BindableBase.cs" />
+    <Compile Include="Utilities\CWIOUtility.cs" />
+    <Compile Include="Utilities\EnviSetting.cs" />
+    <Compile Include="Utilities\IOLibrary.cs" />
     <Compile Include="Utilities\MyICommand.cs" />
+    <Compile Include="Utilities\SafeFileEnumerator.cs" />
+    <Compile Include="Utilities\SavePDF.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PostStatusViewModel.cs" />
     <Compile Include="ViewModels\PreStatusViewModel.cs" />
+    <Compile Include="ViewModels\ProgressBarViewModel.cs" />
+    <Compile Include="ViewModels\SettingBothViewModel.cs" />
+    <Compile Include="ViewModels\SettingHealthCheckViewModel.cs" />
+    <Compile Include="ViewModels\SettingUpdateViewModel.cs" />
+    <Compile Include="ViewModels\SettingYECViewModel.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -73,6 +94,41 @@
     <Compile Include="Views\PreStatusView.xaml.cs">
       <DependentUpon>PreStatusView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProgressBarView.xaml.cs">
+      <DependentUpon>ProgressBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingBothView.xaml.cs">
+      <DependentUpon>SettingBothView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingHealthCheckView.xaml.cs">
+      <DependentUpon>SettingHealthCheckView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingUpdateView.xaml.cs">
+      <DependentUpon>SettingUpdateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingYECView.xaml.cs">
+      <DependentUpon>SettingYECView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\ProgressBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingBothView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingHealthCheckView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingUpdateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingYECView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="StringTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,7 +175,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -131,6 +187,49 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="CaseViewGateway">
+      <Guid>{10082311-D76D-4276-B18F-5C6ACEF93FB1}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CaseViewLib44">
+      <Guid>{DC4F43DC-929F-4D6F-8EF9-9467EDE557BD}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CaseWare">
+      <Guid>{5BD17E3F-3EAF-11D3-86CA-00105A22894E}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>643</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Sidelogo-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\caseware.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
