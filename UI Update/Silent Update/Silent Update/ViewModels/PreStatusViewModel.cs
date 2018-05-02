@@ -1,7 +1,6 @@
 ﻿using Silent_Update.DAL;
 using Silent_Update.Models;
 using Silent_Update.Utilities;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -17,7 +16,6 @@ namespace Silent_Update.ViewModels
         private BackgroundWorker backgroundWorker;
         private ClientInfoUtil clientUtils;
         private bool isCancelByUser;
-        private MainWindowViewModel _mainView;
         private ProgressBarViewModel _workingBar;
         private List<ClientInfo> _clientData;
 
@@ -29,36 +27,28 @@ namespace Silent_Update.ViewModels
         /// <summary>
         /// Public data for binding
         /// </summary>
+        private ICollectionView _groupedClients;
         public ICollectionView Clients { get; set; }
-        public ICollectionView GroupClients { get; set; }
+        public ICollectionView GroupClients { get { return _groupedClients; } set { _groupedClients = value; SetProperty(ref _groupedClients, value); } }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public PreStatusViewModel(MainWindowViewModel mainView)
+        public PreStatusViewModel()
         {
-            _mainView = mainView;
             _workingBar = new ProgressBarViewModel();
             clientUtils = new ClientInfoUtil();
             isCancelByUser = false;
             _clientData = new List<ClientInfo>();
             // Assing the event
             GroupHeaderEventHandler = new MyICommand<object>(GroupHeaderEvent);
-            // CollectingClientData();
             InitializeBackgroundWorker();
         }
 
-        /// <summary>
-        /// Colelcting client file data based on the directory selected during the settinf
-        /// </summary>        
-        private void CollectingClientData ()
+        public List<ClientInfo> ClientData
         {
-            // During the collecting progress, the new Progress bar will be display with the ability to cancel
-            // The option navigation menu will be disabed
-            var _clients = GetGhostData();
-            // Set the group view
-            GroupClients = new ListCollectionView(_clients);
-            GroupClients.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
+            get { return _clientData; }
+            private set { _clientData = value; }
         }
 
         /// <summary>
@@ -85,7 +75,7 @@ namespace Silent_Update.ViewModels
         }
 
         #region Background worker events
-        private void InitializeBackgroundWorker ()
+        public void InitializeBackgroundWorker()
         {
             backgroundWorker = new BackgroundWorker();
 
@@ -102,19 +92,9 @@ namespace Silent_Update.ViewModels
 
             if (!backgroundWorker.IsBusy)
             {
-                EnableDisableNavigation(false);
+                _workingBar.ShowDialog();
                 backgroundWorker.RunWorkerAsync();
             }
-        }
-
-        private void EnableDisableNavigation(bool setting)
-        {
-            _mainView.HomeEnabled = setting;
-            _mainView.SettingEnabled = setting;
-            _mainView.PreviewEnabled = setting;
-            _mainView.RunEnabled = setting;
-            _mainView.SaveEnabled = setting;
-            _mainView.ExitEnabled = setting;
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -132,6 +112,7 @@ namespace Silent_Update.ViewModels
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            _workingBar.CloseDialog();
             if (_clientData.Count < 1)
             {
                 MessageBox.Show(Application.Current.FindResource("NoFile").ToString());
@@ -144,7 +125,7 @@ namespace Silent_Update.ViewModels
                 // Set the group view
                 GroupClients = new ListCollectionView(_clientData);
                 GroupClients.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
-            }            
+            }
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -168,6 +149,8 @@ namespace Silent_Update.ViewModels
                 index++;
                 Thread.Sleep(100);
             }
+            // Create a ghost data
+            _clientData = GetGhostData();
         }
         #endregion
     }

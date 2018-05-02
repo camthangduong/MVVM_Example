@@ -1,7 +1,9 @@
-﻿using Silent_Update.Utilities;
-using System.Windows;
-using System.IO;
+﻿using Silent_Update.Models;
+using Silent_Update.Utilities;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Windows;
 
 namespace Silent_Update.ViewModels
 {
@@ -23,24 +25,19 @@ namespace Silent_Update.ViewModels
         public MainWindowViewModel()
         {
             // Event handler for icon navigation
-            NavCommand = new MyICommand<string>(OnNav);            
-            homeViewModel = new HomeViewModel();            
+            NavCommand = new MyICommand<string>(OnNav);
+            homeViewModel = new HomeViewModel();
             bothViewModel = new SettingBothViewModel();
             healthCheckViewModel = new SettingHealthCheckViewModel();
             updateViewModel = new SettingUpdateViewModel();
-            yecViewModel = new SettingYECViewModel();            
+            yecViewModel = new SettingYECViewModel();
 
-            HomeEnabled = true;
-            SettingEnabled = true;
-            PreviewEnabled = true;
-            RunEnabled = true;
-            SaveEnabled = true;
-            ExitEnabled = true;
+            EnableDisableNavigation(true);
 
             CurrentViewModel = homeViewModel;
         }
 
-        private void EnableDisableNavigation (bool setting)
+        private void EnableDisableNavigation(bool setting)
         {
             HomeEnabled = setting;
             SettingEnabled = setting;
@@ -55,7 +52,7 @@ namespace Silent_Update.ViewModels
             switch (destination)
             {
                 case "home":
-                    CurrentViewModel = homeViewModel;                                        
+                    CurrentViewModel = homeViewModel;
                     break;
                 case "settings":
                     // Getting the option selection
@@ -87,8 +84,8 @@ namespace Silent_Update.ViewModels
                 case "preview":
                     // Check if the client directory is selected
                     string selectedDirectory = EnviSetting.Instance.SourcePath;
-                    string backupDirectory = EnviSetting.Instance.BackupPath;                    
-                    bool isContinue = true;                    
+                    string backupDirectory = EnviSetting.Instance.BackupPath;
+                    bool isContinue = true;
                     if (Directory.Exists(selectedDirectory))
                     {
                         // Check if the selection is Update/Both, if YES then the master selection need to be check
@@ -112,7 +109,7 @@ namespace Silent_Update.ViewModels
                         {
                             // User select cancel
                             break;
-                        }                        
+                        }
                     }
                     else
                     {
@@ -124,17 +121,31 @@ namespace Silent_Update.ViewModels
                     EnviSetting.Instance.GetPasswordList();
                     // Collecting data for client file when the check is passed
                     EnableDisableNavigation(false);
-                    preStatusViewModel = new PreStatusViewModel(this);
+                    preStatusViewModel = new PreStatusViewModel();
                     CurrentViewModel = preStatusViewModel;
-                    // EnableDisableNavigation(true);
+                    // preStatusViewModel.InitializeBackgroundWorker();
+                    EnableDisableNavigation(true);
                     break;
                 case "run":
+                    // Get the client list
+                    EnableDisableNavigation(false);
+                    PreStatusViewModel view = (PreStatusViewModel)CurrentViewModel;
                     // This will run the long process
                     // To Perform the selected task
                     // Need to check for the user credetial correct before process
                     // Check for any file selected to be process  
-                    postStatusViewModel = new PostStatusViewModel();
-                    CurrentViewModel = postStatusViewModel;
+                    List<ClientInfo> data = view.ClientData;
+                    if (data != null && data.Count > 0)
+                    {
+                        postStatusViewModel = new PostStatusViewModel(data);
+                        CurrentViewModel = postStatusViewModel;
+                    }
+                    else
+                    {
+                        // No client file selected
+                        MessageBox.Show(Application.Current.FindResource("SelectDirectory").ToString());
+                    }
+                    EnableDisableNavigation(true);
                     break;
                 case "save":
                     // Save the current result to PDF file
@@ -148,7 +159,7 @@ namespace Silent_Update.ViewModels
                     CurrentViewModel = homeViewModel;
                     break;
             }
-        }        
+        }
 
         /// <summary>
         /// Current active page
@@ -172,7 +183,7 @@ namespace Silent_Update.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void RaisePropertyChange (string propName)
+        private void RaisePropertyChange(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
