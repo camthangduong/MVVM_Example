@@ -26,7 +26,7 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0">
             <TextBlock Text="{StaticResource DirectoryLocation}" FontSize="12"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <TextBox x:Name="updateDirectory" Text="{Binding SourcePath, Mode=TwoWay}"
+                <TextBox x:Name="updateDirectory" Text="{Binding Source, Mode=TwoWay}"
                          Width="300" Height="30" HorizontalAlignment="Center" IsReadOnly="True"/>
                 <TextBlock x:Name="update" Text="&#xE188;" FontSize="32" FontFamily="Segoe MDL2 Assets" Margin="10 0 0 0">
                     <TextBlock.Style>
@@ -117,7 +117,13 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Label Content="{StaticResource UsernameLbl}" Grid.Column="0" Grid.Row="0" Margin="0 5 0 0"/>
-            <TextBox x:Name="usernameTxtBox" Grid.Column="1" Grid.Row="0" Width="200" Margin="0 5 0 0" Text="{Binding Username}" />
+            <TextBox x:Name="usernameTxtBox" Grid.Column="1" Grid.Row="0" Width="200" Margin="0 5 0 0" Text="{Binding Username}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyUp">
+                        <i:InvokeCommandAction Command="{Binding OnKeyUp}" CommandParameter="{Binding ElementName=usernameTxtBox}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
             <Label Content="{StaticResource PasswordLbl}" Grid.Column="0" Grid.Row="1" Margin="0 5 0 0"/>
             <PasswordBox x:Name="passwordTxtBox" Grid.Column="1" Grid.Row="1" Width="200" Margin="0 5 0 0">
                 <i:Interaction.Triggers>

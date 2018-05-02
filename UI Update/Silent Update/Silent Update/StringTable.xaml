@@ -88,7 +88,6 @@
     <system:String x:Key="CorrectSetting">Please ensure all settings are correct.</system:String>
     <system:String x:Key="OnlyAuditUpdate">Only Audit component will be updated</system:String>
     <system:String x:Key="OnlyFinUpdate">Only Financials component will be updated</system:String>
-    <system:String x:Key="PDFCreateError">PDF Document creation falied</system:String>
     <system:String x:Key="ApplicationFail">The error mostly caused by missing dll library file. Please contact administartor for support.</system:String>
     <system:String x:Key="PleaseWait">Please wait..</system:String>
     <system:String x:Key="ProcessFile">Processing client file</system:String>
@@ -107,4 +106,5 @@
     <system:String x:Key="PDFResult">Result</system:String>
     <system:String x:Key="PDFCopyRight">CaseWare International Inc. 2018</system:String>
     <system:String x:Key="PDFAction">Action</system:String>
+    <system:String x:Key="PDFCreateError">PDF Document creation falied</system:String>
 </ResourceDictionary>

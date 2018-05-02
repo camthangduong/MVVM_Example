@@ -1,25 +1,48 @@
 ﻿using Silent_Update.Utilities;
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Controls;
 
 namespace Silent_Update.ViewModels
 {
-    public class SettingYECViewModel : BindableBase
+    public class SettingYECViewModel : BindableBase, INotifyPropertyChanged
     {
         /// <summary>
         /// Private commands
         /// </summary>
         public MyICommand<string> OpenFolderCommand { get; private set; }
-        public MyICommand<PasswordBox> OnKeyUp { get; private set; }
+        public MyICommand<object> OnKeyUp { get; private set; }
 
         private string _password = "";
 
         private void OnKeyUpRelease(object obj)
         {
-            PasswordBox pw = obj as PasswordBox;
-            _password = pw.Password.ToString();
-
+            if (obj is PasswordBox)
+            {
+                PasswordBox pw = obj as PasswordBox;
+                _password = pw.Password.ToString();
+                if (EnviSetting.Instance.Password.Count < 1)
+                {
+                    EnviSetting.Instance.Password.Add(_password);
+                }
+                else
+                {
+                    EnviSetting.Instance.Password[0] = _password;
+                }                
+            }            
+            else if (obj is TextBox)
+            {
+                TextBox user = obj as TextBox;
+                Username = user.Text.ToString();
+                if (EnviSetting.Instance.Username.Count < 1)
+                {
+                    EnviSetting.Instance.Username.Add(Username);
+                } else
+                {
+                    EnviSetting.Instance.Username[0] = Username;
+                }                
+            }            
         }
 
         private void OnOpenFolder(string obj)
@@ -30,28 +53,16 @@ namespace Silent_Update.ViewModels
             {
                 // Only continue when the folder is valid
                 // Set the value to the binding property
-                SourcePath = targetFolder;
-                EnviSetting.Instance.SourcePath = SourcePath;
+                Source = targetFolder;
+                EnviSetting.Instance.SourcePath = Source;
             }
-
         }
 
         ///
         /// Binding properties
         ///         
         private string _source;
-        public string SourcePath
-        {
-            get
-            {
-                return _source;
-            }
-            set
-            {
-                _source = value;
-                SetProperty(ref _source, value);
-            }
-        }
+        public string Source { get { return _source; } set { _source = value; SetProperty(ref _source, value); } }
 
         private bool _LockDownOriginal;
         public bool LockDownOriginal { get { return EnviSetting.Instance.LockDownOriginal; } set { EnviSetting.Instance.LockDownOriginal = value; SetProperty(ref _LockDownOriginal, value); } }
@@ -114,7 +125,11 @@ namespace Silent_Update.ViewModels
         {
             // Initial command
             OpenFolderCommand = new MyICommand<string>(OnOpenFolder);
-            OnKeyUp = new MyICommand<PasswordBox>(OnKeyUpRelease);
+            OnKeyUp = new MyICommand<object>(OnKeyUpRelease);
+            if (Directory.Exists(EnviSetting.Instance.SourcePath))
+            {
+                Source = EnviSetting.Instance.SourcePath;
+            }
         }
     }
 }

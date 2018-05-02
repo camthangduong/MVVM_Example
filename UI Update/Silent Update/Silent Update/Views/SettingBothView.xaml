@@ -119,9 +119,21 @@
             </Grid.ColumnDefinitions>
             <Label Content="{StaticResource UsernameLbl}" Grid.Column="0" Grid.Row="0" Margin="0 5 0 0"/>
             <TextBox x:Name="usernameTxtBox" Grid.Column="1" Text="{Binding Username}" 
-                     Grid.Row="0" Width="200" Margin="0 5 0 0" />
+                     Grid.Row="0" Width="200" Margin="0 5 0 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyUp">
+                        <i:InvokeCommandAction Command="{Binding OnKeyUp}" CommandParameter="{Binding ElementName=usernameTxtBox}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
             <Label Content="{StaticResource PasswordLbl}" Grid.Column="0" Grid.Row="1" Margin="0 5 0 0"/>
-            <PasswordBox x:Name="passwordTxtBox" Grid.Column="1" Grid.Row="1" Width="200" Margin="0 5 0 0"/>
+            <PasswordBox x:Name="passwordTxtBox" Grid.Column="1" Grid.Row="1" Width="200" Margin="0 5 0 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyUp">
+                        <i:InvokeCommandAction Command="{Binding OnKeyUp}" CommandParameter="{Binding ElementName=passwordTxtBox}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
             <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Content="{StaticResource ApplicableLbl}"/>
         </Grid>
         <StackPanel x:Name="templateView" Grid.Column="0" Grid.Row="3">

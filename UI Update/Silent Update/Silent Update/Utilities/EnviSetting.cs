@@ -64,5 +64,45 @@ namespace Silent_Update.Utilities
         public bool CLName { get; set; }
         public string NameDateFormat { get; set; }
         public ObservableCollection<TemplateInfo> MasterTemplate { get; set; }
+
+        public bool CheckIfMasterTemplateSelected ()
+        {
+            bool isSelected = false;
+            if (this.MasterTemplate.Count > 0)
+            {
+                foreach (TemplateInfo item in this.MasterTemplate)
+                {
+                    if (item.Selected)
+                    {
+                        isSelected = true;
+                        break;
+                    }
+                }
+            }
+            return isSelected;
+        }
+
+        public void GetPasswordList ()
+        {            
+            // Check for the password file
+            try
+            {
+                string[] lines = System.IO.File.ReadAllLines("Password.txt");
+
+                foreach (string line in lines)
+                {
+                    string[] credential = line.Split('/');
+
+                    if (credential.Length == 2 && credential[0] != "" && credential[1] != "")
+                    {
+                        // Get Username
+                        Username.Add(credential[0]);
+                        // Get Password
+                        Password.Add(credential[1]);
+                    }
+                }
+            }
+            catch (System.IO.FileNotFoundException){}
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace Silent_Update.ViewModels
     {
         // Command
         public MyICommand<string> FolderCommand { get; private set; }
-        public MyICommand<PasswordBox> OnKeyUp { get; private set; }
+        public MyICommand<object> OnKeyUp { get; private set; }
         public MyICommand<TextBlock> TemplateSelect { get; private set; }
         private string _password = "";
 
@@ -50,8 +50,32 @@ namespace Silent_Update.ViewModels
 
         private void OnKeyUpRelease(object obj)
         {
-            PasswordBox pw = obj as PasswordBox;
-            _password = pw.Password.ToString();
+            if (obj is PasswordBox)
+            {
+                PasswordBox pw = obj as PasswordBox;
+                _password = pw.Password.ToString();
+                if (EnviSetting.Instance.Password.Count < 1)
+                {
+                    EnviSetting.Instance.Password.Add(_password);
+                }
+                else
+                {
+                    EnviSetting.Instance.Password[0] = _password;
+                }
+            }
+            else if (obj is TextBox)
+            {
+                TextBox user = obj as TextBox;
+                Username = user.Text.ToString();
+                if (EnviSetting.Instance.Username.Count < 1)
+                {
+                    EnviSetting.Instance.Username.Add(Username);
+                }
+                else
+                {
+                    EnviSetting.Instance.Username[0] = Username;
+                }
+            }
 
         }
 
@@ -117,12 +141,21 @@ namespace Silent_Update.ViewModels
         public SettingUpdateViewModel()
         {
             FolderCommand = new MyICommand<string>(OnCommandFolderClick);
-            OnKeyUp = new MyICommand<PasswordBox>(OnKeyUpRelease);
+            OnKeyUp = new MyICommand<object>(OnKeyUpRelease);
             TemplateSelect = new MyICommand<TextBlock>(OnTemplateSelectionChange);
             // Ghost data
             // Templates = CreateGhostData();
-            CWIOUtility cwUtil = new CWIOUtility();
+            CWIOUtility cwUtil = new CWIOUtility();            
             Templates = cwUtil.GetInstalledMaster();
+            EnviSetting.Instance.MasterTemplate = Templates;
+            if (Directory.Exists(EnviSetting.Instance.SourcePath))
+            {
+                Source = EnviSetting.Instance.SourcePath;
+            }
+            if (Directory.Exists(EnviSetting.Instance.BackupPath))
+            {
+                Backup = EnviSetting.Instance.BackupPath;
+            }
         }
     }
 }
