@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Simple_Data_List.Library;
 
 namespace Simple_Data_List.ViewModels
 {
-    class PostStatusViewModel
+    class PostStatusViewModel : ViewModelBase
     {
     }
 }

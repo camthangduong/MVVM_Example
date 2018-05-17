@@ -3,11 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:res="clr-namespace:System;assembly=mscorlib"
+        xmlns:res="clr-namespace:System;assembly=mscorlib"        
         xmlns:local="clr-namespace:Simple_Data_List"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:v="clr-namespace:Simple_Data_List.Views"
+        xmlns:vm="clr-namespace:Simple_Data_List.ViewModels"
         mc:Ignorable="d"
         Background="Gainsboro"
         Title="Main Window" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:PreStatusViewModel}">
+            <v:PreStatusView></v:PreStatusView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PostStatusViewModel}">
+            <v:PostStatusView></v:PostStatusView>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
@@ -38,14 +52,39 @@
             <TextBlock Name="home"                                                                 
                        Text="{StaticResource homeIcon}"                        
                        Style="{StaticResource IconText}">
+                <!-- Using System.Windows.Interaction 4.5 -->
+                <i:Interaction.Triggers>
+                    <!-- Event firing when the mouse release on the textblock area -->
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="home"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </TextBlock>
             <TextBlock Name="setting"                                                                      
                        Text="{StaticResource settingsIcon}"                        
                        Style="{StaticResource IconText}">
+                <!-- Using System.Windows.Interaction 4.5 -->
+                <i:Interaction.Triggers>
+                    <!-- Event firing when the mouse release on the textblock area -->
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="settings"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBlock>
+            <TextBlock Name="exit"                                                                      
+                       Text="{StaticResource exitIcon}"                        
+                       Style="{StaticResource IconText}">
+                <!-- Using System.Windows.Interaction 4.5 -->
+                <i:Interaction.Triggers>
+                    <!-- Event firing when the mouse release on the textblock area -->
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding NavCommand}" CommandParameter="exit"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </TextBlock>
         </StackPanel>
         <DockPanel Grid.Row="0" Grid.Column="1">
-            <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
+            <ContentControl Content="{Binding CurrentVM}"></ContentControl>
         </DockPanel>
     </Grid>
 </Window>

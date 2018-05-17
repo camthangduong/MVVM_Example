@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Simple_Data_List.Library
 {
@@ -9,14 +10,18 @@ namespace Simple_Data_List.Library
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string prop)
+        protected virtual void SetProperty<T>(ref T memeber, T val, [CallerMemberName] string propertyName = null)
         {
-            OnPropertyChanged(new PropertyChangedEventArgs(prop));
-        }
-
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            this.PropertyChanged?.Invoke(this, e);
+            memeber = val;
+            // Invoke the property change event
+            //if (PropertyChanged != null)
+            //{
+            //    PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            //}
+            /**
+             * Simplify of the statement above can be used
+             * */
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
