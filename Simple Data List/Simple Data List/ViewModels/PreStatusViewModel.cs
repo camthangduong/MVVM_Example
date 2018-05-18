@@ -7,33 +7,61 @@ namespace Simple_Data_List.ViewModels
 {
     public class PreStatusViewModel : ViewModelBase
     {
+
+        private BackgroundWorker backgroundWorker;
         private CollectionBinding<ClientInfo> clientList;
         private ICollectionView groupedClients;
+        private MainWindowViewModel mainVM;
 
-        public ICollectionView GroupClients { get { return groupedClients; } set { groupedClients = value; SetProperty(ref groupedClients, value); } }
+        public ICollectionView GroupClients { get { return groupedClients; } set { groupedClients = value; NotifyPropertyChanged("ClientList"); SetProperty(ref groupedClients, value); } }
 
-        public PreStatusViewModel()
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="_mainVM"></param>
+        public PreStatusViewModel(MainWindowViewModel _mainVM)
         {
+            mainVM = _mainVM;
             clientList = new CollectionBinding<ClientInfo>();
+            backgroundWorker = new BackgroundWorker();
+            // Background Worker Process
+            backgroundWorker.DoWork += BKDoWork;
+            backgroundWorker.RunWorkerCompleted += BKCompleted;
+            // Change status
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.ProgressChanged += BKChangedState;
+            // Cancellation
+            backgroundWorker.WorkerSupportsCancellation = true;
+            // Start the worker
+            if (!backgroundWorker.IsBusy)
+            {
+                mainVM.ToggleEnableProp(false);
+                backgroundWorker.RunWorkerAsync();
+            }
         }
 
-        private void GhostData()
+        private void BKChangedState(object sender, ProgressChangedEventArgs e)
+        {
+            // throw new NotImplementedException();
+        }
+
+        private void BKCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            GroupClients = new ListCollectionView(clientList);
+            GroupClients.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
+            mainVM.ToggleEnableProp(true);
+        }
+
+        private void BKDoWork(object sender, DoWorkEventArgs e)
         {
             GhostDataUtilities ghostUtil = new GhostDataUtilities();
             clientList = ghostUtil.GhostPreStatusData();
-            GroupClients = new ListCollectionView(clientList);
-            GroupClients.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
         }
 
         public CollectionBinding<ClientInfo> ClientList
         {
             get { return clientList; }
             set { clientList = value; SetProperty(ref clientList, value); }
-        }
-
-        public void InitializeData()
-        {
-            GhostData();
         }
     }
 }

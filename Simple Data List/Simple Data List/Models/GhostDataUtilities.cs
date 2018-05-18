@@ -37,6 +37,12 @@ namespace Simple_Data_List.Models
                     Group = "Not Processed"
                 }
             };
+            // Delay the time
+            double i = 1;
+            while (i < 20000000)
+            {
+                i++;
+            }
             return clientList;
         }
     }

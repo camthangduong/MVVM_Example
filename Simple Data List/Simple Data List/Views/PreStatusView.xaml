@@ -10,11 +10,77 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
-        <vm:PreStatusViewModel></vm:PreStatusViewModel>
+        <!-- 
+            Because I don't create an Messenger class to communicate between ViewModel 
+            So I use the constructor method to passing the constructor for the VM
+        
+            When there is more complex - It should be create the Messenger class
+        -->
+        <ObjectDataProvider ObjectType="vm:PreStatusViewModel">
+            <ObjectDataProvider.ConstructorParameters>
+                <vm:MainWindowViewModel></vm:MainWindowViewModel>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
     </UserControl.DataContext>
     <Grid>
-        <DataGrid ItemsSource="{Binding GroupClients}">
+        <DataGrid x:Name="dataView" ItemsSource="{Binding GroupClients}"
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
             <!-- Define the group style -->
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <!-- Define the header style -->
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="22"></TextBlock>
+                                                    <TextBlock Text=" (" Foreground="Silver" FontSize="22" FontStyle="Italic"></TextBlock>
+                                                    <TextBlock Text="{Binding Path=ItemCount}" FontSize="22" Margin="4,0,4,0" Foreground="Green" FontWeight="Bold" FontStyle="Italic"></TextBlock>
+                                                    <TextBlock Text=")" Foreground="Silver" FontSize="22" FontStyle="Italic"></TextBlock>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <Expander.Content>
+                                                <ItemsPresenter />
+                                            </Expander.Content>
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+            <!-- Define column style -->
+            <DataGrid.Columns>
+                <!--Selected column-->
+                <DataGridTemplateColumn Header="Selected" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=Selected}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--Name column-->
+                <DataGridTemplateColumn Header="File Name" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--Version column-->
+                <DataGridTemplateColumn Header="Version" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Version}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </UserControl>

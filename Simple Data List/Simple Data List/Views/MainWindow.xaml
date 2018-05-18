@@ -49,7 +49,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel  Orientation="Vertical" Grid.Row="0" Grid.Column="0" Background="#0096C1">
-            <TextBlock Name="home"                                                                 
+            <TextBlock Name="home"     
+                       IsEnabled="{Binding HomeEnabled}"
                        Text="{StaticResource homeIcon}"                        
                        Style="{StaticResource IconText}">
                 <!-- Using System.Windows.Interaction 4.5 -->
@@ -60,7 +61,8 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBlock>
-            <TextBlock Name="setting"                                                                      
+            <TextBlock Name="setting"     
+                       IsEnabled="{Binding SettingEnabled}"
                        Text="{StaticResource settingsIcon}"                        
                        Style="{StaticResource IconText}">
                 <!-- Using System.Windows.Interaction 4.5 -->
@@ -71,7 +73,8 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBlock>
-            <TextBlock Name="exit"                                                                      
+            <TextBlock Name="exit"                      
+                       IsEnabled="{Binding ExitEnabled}"
                        Text="{StaticResource exitIcon}"                        
                        Style="{StaticResource IconText}">
                 <!-- Using System.Windows.Interaction 4.5 -->

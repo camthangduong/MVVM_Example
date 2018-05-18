@@ -11,8 +11,8 @@ namespace Simple_Data_List.ViewModels
     {
         #region Private variable for this class
 
-        private readonly PreStatusViewModel preStatusVM;
-        private readonly PostStatusViewModel postStatusVM;
+        private PreStatusViewModel preStatusVM;
+        private PostStatusViewModel postStatusVM;
         private ViewModelBase currentVM;
 
         private bool homeEnabled, settingsEnabled, exitEnabled;
@@ -21,7 +21,7 @@ namespace Simple_Data_List.ViewModels
         /// Enable/Disable the navigation button
         /// </summary>
         /// <param name="setting">TRUE/FALSE</param>
-        private void ToggleEnableProp(bool setting)
+        public void ToggleEnableProp(bool setting)
         {
             HomeEnabled = setting;
             settingsEnabled = setting;
@@ -37,10 +37,13 @@ namespace Simple_Data_List.ViewModels
             switch (obj)
             {
                 case "home":
-                    preStatusVM.InitializeData();
+                    ToggleEnableProp(true);
+                    preStatusVM = new PreStatusViewModel(this);
                     CurrentVM = preStatusVM;
                     break;
                 case "settings":
+                    ToggleEnableProp(true);
+                    postStatusVM = new PostStatusViewModel(this);
                     CurrentVM = postStatusVM;
                     break;
                 case "exit":
@@ -56,8 +59,7 @@ namespace Simple_Data_List.ViewModels
         {
             // Assign the Navigation event
             NavCommand = new RelayCommand<string>(OnNavigation);
-            preStatusVM = new PreStatusViewModel();
-            postStatusVM = new PostStatusViewModel();
+            ToggleEnableProp(true);
         }
         #endregion
 
@@ -81,7 +83,7 @@ namespace Simple_Data_List.ViewModels
         }
 
         public bool HomeEnabled { get { return homeEnabled; } set { homeEnabled = value; RaisePropertyChange("HomeEnabled"); } }
-        public bool Settingsnabled { get { return settingsEnabled; } set { settingsEnabled = value; RaisePropertyChange("Settingsnabled"); } }
+        public bool SettingEnabled { get { return settingsEnabled; } set { settingsEnabled = value; RaisePropertyChange("SettingEnabled"); } }
         public bool ExitEnabled { get { return exitEnabled; } set { exitEnabled = value; RaisePropertyChange("ExitEnabled"); } }
 
         #endregion
