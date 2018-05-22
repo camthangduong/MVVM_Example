@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data Grid Sample", "Data Grid Sample\Data Grid Sample.csproj", "{F774D023-119D-474F-A652-50D0FFB586B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F774D023-119D-474F-A652-50D0FFB586B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F774D023-119D-474F-A652-50D0FFB586B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F774D023-119D-474F-A652-50D0FFB586B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F774D023-119D-474F-A652-50D0FFB586B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {276E0C34-367A-4561-851F-C51675F2849B}
+	EndGlobalSection
+EndGlobal
