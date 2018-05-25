@@ -10,10 +10,20 @@
              xmlns:vm="clr-namespace:Test_Data_Grid"
              x:Name="userTable"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:TableViewModel></vm:TableViewModel>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <DataGrid x:Name="DataTable" ItemsSource="{Binding GroupClients, Mode=TwoWay}"
                   CanUserSortColumns="False"
@@ -53,6 +63,7 @@
                         <DataTemplate>
                             <StackPanel>
                                 <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                          IsEnabled="{Binding Path=IsEnable, Mode=OneTime}"
                                           HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <!-- Event firing when the mouse release on the textblock area -->

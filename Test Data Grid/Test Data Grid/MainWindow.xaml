@@ -4,28 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:System;assembly=mscorlib"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:vm="clr-namespace:Test_Data_Grid"        
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:local="clr-namespace:Test_Data_Grid"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.DataContext>
         <vm:ViewModelMain></vm:ViewModelMain>
     </Window.DataContext>
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:TableViewModel}">
-            <local:TableView></local:TableView>
-        </DataTemplate>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type vm:TableViewModel}">
+                <local:TableView></local:TableView>
+            </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
-                <Style TargetType="TextBlock" x:Key="IconText">
-                    <Setter Property="FontSize" Value="32"/>
-                    <Setter Property="Foreground" Value="#ADADAD"/>
-                    <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-                    <Setter Property="Margin" Value="10,10,10,10"/>
+                <Style TargetType="Button" x:Key="IconText" BasedOn="{StaticResource MaterialDesignFloatingActionButton}">
+                    <Setter Property="Width" Value="32"/>
+                    <Setter Property="Height" Value="32"/>
+                    <Setter Property="Foreground" Value="#DD000000"/>
+                    <Setter Property="Background" Value="#0096C1"/>
+                    <Setter Property="BorderBrush" Value="#81d4fa"/>
+                    <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="True"/>
+                    <Setter Property="materialDesign:ButtonProgressAssist.Value" Value="0"/>
+                    <Setter Property="materialDesign:ButtonProgressAssist.IndicatorForeground" Value="#e65100"/>
                 </Style>
                 <res:String x:Key="homeIcon">&#xE10F;</res:String>
                 <res:String x:Key="settingsIcon">&#xE115;</res:String>
@@ -44,31 +58,25 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel  Orientation="Vertical" Grid.Row="0" Grid.Column="0" Background="#0096C1">
-            <TextBlock Name="home"     
-                       IsEnabled="{Binding HomeEnabled}"
-                       Text="{StaticResource homeIcon}"                        
-                       Style="{StaticResource IconText}">
-                <!-- Using System.Windows.Interaction 4.5 -->
-                <i:Interaction.Triggers>
-                    <!-- Event firing when the mouse release on the textblock area -->
-                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding HomeCommand}" ></i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBlock>
-            <TextBlock Name="exit"                      
-                       IsEnabled="{Binding ExitEnabled}"
-                       Text="{StaticResource exitIcon}"                        
-                       Style="{StaticResource IconText}">
-                <!-- Using System.Windows.Interaction 4.5 -->
-                <i:Interaction.Triggers>
-                    <!-- Event firing when the mouse release on the textblock area -->
-                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding ExitButtonCommand}"></i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBlock>
+        <StackPanel  Orientation="Vertical" Grid.Row="0" Grid.Column="0" Background="Gainsboro">
+            <Button x:Name="homeBtn"
+                    Style="{StaticResource IconText}"
+                    Margin="10, 20, 10, 20"                    
+                    Content="{materialDesign:PackIcon Kind=Home}"
+                    Command="{Binding HomeCommand}"
+                    MouseEnter="ElementBtn_MouseEnter"
+                    MouseLeave="ElementBtn_MouseLeave"
+                    MouseLeftButtonUp="ElementBtn_MouseEnter"
+                    >
+            </Button>
+            <Button Style="{StaticResource IconText}"
+                    Margin="10, 0, 10, 0"                   
+                    Content="{materialDesign:PackIcon Kind=Close}"
+                    Command="{Binding ExitButtonCommand}"     
+                    MouseEnter="ElementBtn_MouseEnter"
+                    MouseLeave="ElementBtn_MouseLeave"
+                    />
+
         </StackPanel>
         <DockPanel Grid.Row="0" Grid.Column="1">
             <ContentControl Content="{Binding CurrentVM}"></ContentControl>

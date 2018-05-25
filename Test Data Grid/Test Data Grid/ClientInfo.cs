@@ -31,5 +31,7 @@ namespace Test_Data_Grid
             get { return _group; }
             set { _group = value; RaisePropertyChanged("Group"); }
         }
+
+        public bool IsEnable { get; set; }
     }
 }
