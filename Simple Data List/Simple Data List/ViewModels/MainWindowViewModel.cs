@@ -1,4 +1,5 @@
 ﻿using Simple_Data_List.Library;
+using Simple_Data_List.Models;
 using System.ComponentModel;
 using System.Windows;
 
@@ -38,11 +39,12 @@ namespace Simple_Data_List.ViewModels
             {
                 case "home":
                     ToggleEnableProp(true);
-                    preStatusVM = new PreStatusViewModel(this);
+                    preStatusVM = new PreStatusViewModel();
                     CurrentVM = preStatusVM;
                     break;
                 case "settings":
                     ToggleEnableProp(true);
+                    CollectionBinding<ClientInfo> ClientList = preStatusVM.ClientList;
                     postStatusVM = new PostStatusViewModel(this);
                     CurrentVM = postStatusVM;
                     break;

@@ -19,6 +19,8 @@ namespace Simple_Data_List.Models
         #endregion
 
         #region Public properties
+        public int Index { get; set; }
+
         public bool Selected
         {
             get { return selected; }

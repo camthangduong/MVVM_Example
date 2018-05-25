@@ -1,35 +1,20 @@
-﻿<UserControl x:Class="Simple_Data_List.Views.PreStatusView"
+﻿<UserControl x:Class="Test_Data_Grid.TableView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
-             xmlns:local="clr-namespace:Simple_Data_List.Views"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:v="clr-namespace:Simple_Data_List.Views"
-             xmlns:vm="clr-namespace:Simple_Data_List.ViewModels"
-             mc:Ignorable="d"              
+             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+             xmlns:local="clr-namespace:Test_Data_Grid"
+             xmlns:vm="clr-namespace:Test_Data_Grid"
              x:Name="userTable"
+             mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
-        <!-- 
-            Because I don't create an Messenger class to communicate between ViewModel 
-            So I use the constructor method to passing the constructor for the VM
-        
-            When there is more complex - It should be create the Messenger class
-        -->
-        <vm:PreStatusViewModel></vm:PreStatusViewModel>
+        <vm:TableViewModel></vm:TableViewModel>
     </UserControl.DataContext>
-    <StackPanel>
-        <!--TextBlock x:Name="TestIndex" Text="Test Index"></>
-        <CheckBox IsChecked="True" HorizontalAlignment="Left" VerticalAlignment="Center" Content="testing the event firing">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:InvokeCommandAction Command="{Binding ClientStatusChange}" CommandParameter="{Binding ElementName=TestIndex}"></i:InvokeCommandAction>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </CheckBox-->
-        <DataGrid x:Name="dataView" ItemsSource="{Binding GroupClients, Mode=OneWay}"
+    <Grid>
+        <DataGrid x:Name="DataTable" ItemsSource="{Binding GroupClients}"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
             <!-- Define the group style -->
             <DataGrid.GroupStyle>
@@ -60,20 +45,18 @@
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </DataGrid.GroupStyle>
-            <!-- Define column style -->
             <DataGrid.Columns>
-                <!--Selected column-->
                 <DataGridTemplateColumn Header="Selected" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock x:Name="Index" Text="{Binding Path=Index}" Visibility="Collapsed"></TextBlock>
-                                <CheckBox IsChecked="{Binding Path=Selected, Mode=OneWay}" 
+                                <TextBlock x:Name="Index" Text="Test Index" Visibility="Collapsed"></TextBlock>
+                                <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                           HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <i:Interaction.Triggers>
+                                        <!-- Event firing when the mouse release on the textblock area -->
                                         <i:EventTrigger EventName="Click">
-                                            <i:InvokeCommandAction Command="{Binding DataContext.ClientStatusChange, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, diag:PresentationTraceSources.TraceLevel=High}" 
-                                                                   CommandParameter="{Binding ElementName=Index}"></i:InvokeCommandAction>
+                                            <i:InvokeCommandAction Command="{Binding DataContext.CheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, diag:PresentationTraceSources.TraceLevel=High}" CommandParameter="{Binding ElementName=Index}"></i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </CheckBox>
@@ -82,22 +65,14 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <!--Name column-->
-                <!--DataGridTemplateColumn Header="File Name" Width="Auto">
+                <DataGridTemplateColumn Header="Name" Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn-->
-                <!--Version column-->
-                <!--DataGridTemplateColumn Header="Version" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=Version}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn-->
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-    </StackPanel>
+    </Grid>
 </UserControl>

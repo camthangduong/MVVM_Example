@@ -1,0 +1,77 @@
+﻿<Window x:Class="Test_Data_Grid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:System;assembly=mscorlib"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:vm="clr-namespace:Test_Data_Grid"        
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        xmlns:local="clr-namespace:Test_Data_Grid"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:ViewModelMain></vm:ViewModelMain>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:TableViewModel}">
+            <local:TableView></local:TableView>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style TargetType="TextBlock" x:Key="IconText">
+                    <Setter Property="FontSize" Value="32"/>
+                    <Setter Property="Foreground" Value="#ADADAD"/>
+                    <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                    <Setter Property="Margin" Value="10,10,10,10"/>
+                </Style>
+                <res:String x:Key="homeIcon">&#xE10F;</res:String>
+                <res:String x:Key="settingsIcon">&#xE115;</res:String>
+                <res:String x:Key="previewIcon">&#xE12A;</res:String>
+                <res:String x:Key="runIcon">&#xE102;</res:String>
+                <res:String x:Key="saveIcon">&#xE105;</res:String>
+                <res:String x:Key="exitIcon">&#xE10A;</res:String>
+                <res:String x:Key="warningIcon">&#xE113;</res:String>
+                <res:String x:Key="folderIcon">&#xE188;</res:String>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel  Orientation="Vertical" Grid.Row="0" Grid.Column="0" Background="#0096C1">
+            <TextBlock Name="home"     
+                       IsEnabled="{Binding HomeEnabled}"
+                       Text="{StaticResource homeIcon}"                        
+                       Style="{StaticResource IconText}">
+                <!-- Using System.Windows.Interaction 4.5 -->
+                <i:Interaction.Triggers>
+                    <!-- Event firing when the mouse release on the textblock area -->
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding HomeCommand}" ></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBlock>
+            <TextBlock Name="exit"                      
+                       IsEnabled="{Binding ExitEnabled}"
+                       Text="{StaticResource exitIcon}"                        
+                       Style="{StaticResource IconText}">
+                <!-- Using System.Windows.Interaction 4.5 -->
+                <i:Interaction.Triggers>
+                    <!-- Event firing when the mouse release on the textblock area -->
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding ExitButtonCommand}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBlock>
+        </StackPanel>
+        <DockPanel Grid.Row="0" Grid.Column="1">
+            <ContentControl Content="{Binding CurrentVM}"></ContentControl>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -11,6 +11,7 @@ namespace Simple_Data_List.Models
                 new ClientInfo
                 {
                     Selected = true,
+                    Index = 0,
                     Name = "Client File 1",
                     Version = "19.00",
                     Group = "Processed"
@@ -18,6 +19,7 @@ namespace Simple_Data_List.Models
                 new ClientInfo
                 {
                     Selected = true,
+                    Index = 1,
                     Name = "Client File 2",
                     Version = "20.00",
                     Group = "Processed"
@@ -25,6 +27,7 @@ namespace Simple_Data_List.Models
                 new ClientInfo
                 {
                     Selected = false,
+                    Index = 2,
                     Name = "Client File 3",
                     Version = "Unknown",
                     Group = "Not Processed"
@@ -32,6 +35,7 @@ namespace Simple_Data_List.Models
                 new ClientInfo
                 {
                     Selected = false,
+                    Index = 3,
                     Name = "Client File 4",
                     Version = "16.00",
                     Group = "Not Processed"
