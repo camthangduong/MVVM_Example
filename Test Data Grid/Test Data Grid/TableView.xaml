@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
              xmlns:local="clr-namespace:Test_Data_Grid"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vm="clr-namespace:Test_Data_Grid"
              x:Name="userTable"
              mc:Ignorable="d" 
@@ -14,7 +15,8 @@
         <vm:TableViewModel></vm:TableViewModel>
     </UserControl.DataContext>
     <Grid>
-        <DataGrid x:Name="DataTable" ItemsSource="{Binding GroupClients}"
+        <DataGrid x:Name="DataTable" ItemsSource="{Binding GroupClients, Mode=TwoWay}"
+                  CanUserSortColumns="False"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
             <!-- Define the group style -->
             <DataGrid.GroupStyle>
@@ -50,13 +52,12 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock x:Name="Index" Text="Test Index" Visibility="Collapsed"></TextBlock>
                                 <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                           HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <!-- Event firing when the mouse release on the textblock area -->
                                         <i:EventTrigger EventName="Click">
-                                            <i:InvokeCommandAction Command="{Binding DataContext.CheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, diag:PresentationTraceSources.TraceLevel=High}" CommandParameter="{Binding ElementName=Index}"></i:InvokeCommandAction>
+                                            <i:InvokeCommandAction Command="{Binding DataContext.CheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, diag:PresentationTraceSources.TraceLevel=High}" CommandParameter="{Binding}"></i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </CheckBox>

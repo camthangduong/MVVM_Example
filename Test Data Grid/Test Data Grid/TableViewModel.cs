@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace Test_Data_Grid
@@ -21,29 +18,35 @@ namespace Test_Data_Grid
                 this.OnPropertyChanged("GroupClients");
             }
         }
-        
-        public RelayCommand CheckedCommand { get; set; }        
+
+        public RelayCommand CheckedCommand { get; set; }
 
         public TableViewModel()
+        {
+            CheckedCommand = new RelayCommand(ChangeStatus);
+            Initialize();
+        }
+
+        private void Initialize()
         {
             clientList = new ObservableCollection<ClientInfo>();
             clientList = FakeDatabaseLayer.GetPeopleFromDatabase();
             GroupClients = new ListCollectionView(clientList);
             GroupClients.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
-            CheckedCommand = new RelayCommand(ChangeStatus);
         }
 
         private void ChangeStatus(object obj)
         {
-            TextBlock txtBlock = (TextBlock)obj;
-            string indexStr = txtBlock.Text;
-            MessageBox.Show("Click");
+            // TextBlock txtBlock = (TextBlock)obj;
+            //string indexStr = txtBlock.Text;
+            //MessageBox.Show(GroupClients.CurrentPosition.ToString());
+            Mediator.NotifyColleagues("StatusChange", ClientList);
         }
 
         public ObservableCollection<ClientInfo> ClientList
         {
             get { return clientList; }
-            set { clientList = value; this.OnPropertyChanged("ClientList"); }
+            set { clientList = value; }
         }
     }
 }

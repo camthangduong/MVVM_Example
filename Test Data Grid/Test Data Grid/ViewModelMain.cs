@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Test_Data_Grid
 {
@@ -14,17 +8,24 @@ namespace Test_Data_Grid
         // Command for binding to the event        
         private RelayCommand homeCommand, exitButtonCommand;
         private TableViewModel _tableView;
+        ObservableCollection<ClientInfo> clientList;
 
         public ViewModelMain()
         {
             ExitButtonCommand = new RelayCommand(ExitApp);
-            HomeCommand = new RelayCommand(HomeEvent);                                   
+            HomeCommand = new RelayCommand(HomeEvent);
         }
 
         private void HomeEvent(object obj)
         {
             _tableView = new TableViewModel();
             CurrentVM = _tableView;
+            Mediator.Register("StatusChange", TableStatusChange);
+        }
+
+        private void TableStatusChange(object obj)
+        {
+            clientList = (ObservableCollection<ClientInfo>)obj;
         }
 
         private ViewModelBase _currentViewModel;
@@ -41,10 +42,10 @@ namespace Test_Data_Grid
 
         private void ExitApp(object obj)
         {
-            ObservableCollection<ClientInfo> clientList;
+
             if (_tableView != null)
             {
-                clientList = _tableView.ClientList;
+                // bool test = clientList[0].Selected;
             }
             Application.Current.Shutdown();
         }
@@ -71,6 +72,6 @@ namespace Test_Data_Grid
             {
                 this.homeCommand = value;
             }
-        }        
+        }
     }
 }
