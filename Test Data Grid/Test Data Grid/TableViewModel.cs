@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Test_Data_Grid
@@ -8,6 +9,8 @@ namespace Test_Data_Grid
     {
         private ObservableCollection<ClientInfo> clientList;
         private ICollectionView groupedClients;
+        private BusyView busyIndicator;
+        private bool dataNotLoad;
         public ICollectionView GroupClients
         {
             get { return groupedClients; }
@@ -24,15 +27,29 @@ namespace Test_Data_Grid
         public TableViewModel()
         {
             CheckedCommand = new RelayCommand(ChangeStatus);
-            Initialize();
+            busyIndicator = new BusyView();
+            clientList = new ObservableCollection<ClientInfo>();
+            dataNotLoad = true;
+            InitializeAsync();
         }
 
-        private void Initialize()
+        private void InitializeAsync()
         {
-            clientList = new ObservableCollection<ClientInfo>();
-            clientList = FakeDatabaseLayer.GetPeopleFromDatabase();
+            var _list = await CallLoadData();
+
+            busyIndicator.Close();
             GroupClients = new ListCollectionView(clientList);
             GroupClients.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
+        }
+
+        private async Task<ObservableCollection<ClientInfo>> CallLoadData()
+        {
+            var task = Task.Run(() =>
+            {
+                clientList = FakeDatabaseLayer.GetPeopleFromDatabase();
+            });
+
+            return await (ObservableCollection<ClientInfo>)task.R;
         }
 
         private void ChangeStatus(object obj)
